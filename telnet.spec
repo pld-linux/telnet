@@ -116,13 +116,13 @@ make INSTALLROOT=$RPM_BUILD_ROOT install
 install -d $RPM_BUILD_ROOT/etc/X11/wmconfig/
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/telnet
 
-rm -f 	$RPM_BUILD_ROOT/usr/man/man8/*
-install telnetd/*.8 $RPM_BUILD_ROOT/usr/man/man8
+rm -f 	$RPM_BUILD_ROOT%{_mandir}/man8/*
+install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
 rm -f 	$RPM_BUILD_ROOT/usr/sbin/*
 install -s telnetd/telnetd $RPM_BUILD_ROOT/usr/sbin
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man[158]/*
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man[158]/*
 gzip -9nf BUGS README
 
 %clean
@@ -133,14 +133,14 @@ rm -rf $RPM_BUILD_ROOT
 %config(missingok) /etc/X11/wmconfig/telnet
 
 %attr(755,root,root) /usr/bin/*
-/usr/man/man1/*
+%{_mandir}/man1/*
 
 %files -n telnetd
 %defattr(644,root,root,755)
 %doc {BUGS,README}.gz
 
 %attr(755,root,root) /usr/sbin/*
-/usr/man/man[58]/*
+%{_mandir}/man[58]/*
 
 %changelog
 * Mon Apr 26 1999 Micha³ Kuratczyk <kura@pld.org.pl>
