@@ -5,7 +5,7 @@ Summary(pl):	Telnet klient
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	10
+Release:	11
 Group:		Networking
 Group(pl):	Sieciowe
 License:	BSD
@@ -133,7 +133,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/Network
+%{_applnkdir}/Network/telnet.desktop
 %{_mandir}/man1/*
 
 %files -n telnetd
