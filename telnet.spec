@@ -11,12 +11,12 @@ Release:	26
 Group:		Networking
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
-# Source0-md5: d6beabaaf53fe6e382c42ce3faa05a36
+# Source0-md5:	d6beabaaf53fe6e382c42ce3faa05a36
 Source1:	%{name}d.inetd
 Source2:	%{name}.desktop
 Source3:	%{name}.png
 Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
-# Source4-md5: a1e67907c855b6f596321f2cc8318e1a
+# Source4-md5:	a1e67907c855b6f596321f2cc8318e1a
 Patch0:		netkit-%{name}-ipv6.patch
 Patch1:		netkit-%{name}-fixes.patch
 Patch2:		netkit-%{name}-ayt.patch
