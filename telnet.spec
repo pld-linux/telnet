@@ -5,7 +5,7 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.10
-Release:	34
+Release:	35
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
@@ -19,6 +19,7 @@ Patch4:		netkit-telnet-openpty.patch
 Patch5:		telnet-maint.patch
 Patch6:		telnet-utmp.patch
 Patch7:		telnetd-term.patch
+BuildRequires:	ncurses-devel >= 5.0
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
