@@ -7,13 +7,14 @@ Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	22
+Release:	23
 Group:		Networking
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	%{name}d.inetd
 Source2:	%{name}.desktop
-Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
+Source3:	%{name}.png
+Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 Patch0:		netkit-%{name}-ipv6.patch
 Patch1:		netkit-%{name}-fixes.patch
 Patch2:		netkit-%{name}-ayt.patch
@@ -130,12 +131,14 @@ CFLAGS="%{rpmcflags} -DINET6" \
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Network,/etc/sysconfig/rc-inetd}
+	$RPM_BUILD_ROOT{%{_applnkdir}/Network,%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT/etc/sysconfig/rc-inetd}
 
 %{__make} INSTALLROOT=$RPM_BUILD_ROOT install
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnetd
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network
+install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -f 	$RPM_BUILD_ROOT%{_mandir}/man8/*
 install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
@@ -143,7 +146,7 @@ install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
 rm -f $RPM_BUILD_ROOT%{_sbindir}/*
 install telnetd/telnetd $RPM_BUILD_ROOT%{_sbindir}
 
-bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 rm -f $RPM_BUILD_ROOT%{_mandir}/*/*/*.old
 
 %clean
@@ -167,6 +170,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %{_applnkdir}/Network/telnet.desktop
+%{_pixmapsdir}/telnet.png
 %{_mandir}/man1/*
 %lang(es) %{_mandir}/es/man1/*
 %lang(hu) %{_mandir}/hu/man1/*
