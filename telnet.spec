@@ -23,7 +23,7 @@ Patch2:		netkit-%{name}-ayt.patch
 Patch3:		netkit-%{name}-issue.patch
 Patch4:		netkit-%{name}-cpp.patch
 Patch5:		netkit-%{name}-pld_man.patch
-BuildRequires:	gcc-c++
+BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	heimdal-telnet
