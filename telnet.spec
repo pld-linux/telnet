@@ -86,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 - added using %%{name} and %%{version} in Source,
 - fixed passing $RPM_OPT_FLAGS,
 - telnet damon in separated package,
-- added %attr and %defattr macros in %files (allow build package from
+- added %attr and %defattr macros in %files (allows build package from
   non-root account).
 
 * Sun Jul 05 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
