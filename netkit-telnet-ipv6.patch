@@ -1,6 +1,6 @@
-diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/commands.cc
---- netkit-telnet-0.10.orig/telnet/commands.cc	Sat May 22 12:27:38 1999
-+++ netkit-telnet-0.10/telnet/commands.cc	Sat May 22 12:28:01 1999
+diff -ur netkit-telnet-0.16.orig/telnet/commands.cc netkit-telnet-0.16/telnet/commands.cc
+--- netkit-telnet-0.16.orig/telnet/commands.cc	Tue Sep 28 18:29:24 1999
++++ netkit-telnet-0.16/telnet/commands.cc	Wed Jul 12 16:21:05 2000
 @@ -101,7 +101,11 @@
  
  
@@ -39,7 +39,7 @@ diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/c
  
      if (connected) {
  	printf("?Already connected to %s\n", hostname);
-@@ -1681,11 +1693,11 @@
+@@ -1685,11 +1697,11 @@
      if (hostp == 0)
  	goto usage;
  
@@ -52,7 +52,7 @@ diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/c
  	srp = 0;
  	int temp = sourceroute(hostp, &srp, &srlen);
  	if (temp == 0) {
-@@ -1702,7 +1714,56 @@
+@@ -1706,7 +1718,56 @@
  	}
      } 
      else {
@@ -110,7 +110,7 @@ diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/c
  	if (inet_aton(hostp, &sn.sin_addr)) {
  	    sn.sin_family = AF_INET;
  	    strcpy(_hostname, hostp);
-@@ -1730,9 +1791,7 @@
+@@ -1734,9 +1795,7 @@
  		return 0;
  	    }
  	}
@@ -120,7 +120,7 @@ diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/c
      if (portp) {
  	if (*portp == '-') {
  	    portp++;
-@@ -1773,6 +1832,7 @@
+@@ -1777,6 +1836,7 @@
  	else if (x==1) continue;
  	connected++;
      } while (connected == 0);
@@ -128,10 +128,10 @@ diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/c
      cmdrc(hostp, hostname);
      if (autologin && user == NULL) {
  	struct passwd *pw;
-diff -urN netkit-telnet-0.10.orig/telnet/netlink.cc netkit-telnet-0.10/telnet/netlink.cc
---- netkit-telnet-0.10.orig/telnet/netlink.cc	Sat May 22 12:27:38 1999
-+++ netkit-telnet-0.10/telnet/netlink.cc	Sat May 22 12:28:01 1999
-@@ -113,6 +113,28 @@
+diff -ur netkit-telnet-0.16.orig/telnet/netlink.cc netkit-telnet-0.16/telnet/netlink.cc
+--- netkit-telnet-0.16.orig/telnet/netlink.cc	Sat Dec 11 20:53:37 1999
++++ netkit-telnet-0.16/telnet/netlink.cc	Wed Jul 12 16:21:05 2000
+@@ -86,6 +86,28 @@
      ::close(net);
  }
  
@@ -159,8 +159,8 @@ diff -urN netkit-telnet-0.10.orig/telnet/netlink.cc netkit-telnet-0.10/telnet/ne
 +#else /* INET6 */
  int netlink::connect(int debug, struct hostent *host, 
  		     struct sockaddr_in *sn, 
- 		     const char *srcroute, int srlen, int tos) 
-@@ -171,7 +193,7 @@
+ 		     char *srcroute, int srlen, int tos) 
+@@ -146,7 +168,7 @@
      }
      return 2;
  }
@@ -168,10 +168,10 @@ diff -urN netkit-telnet-0.10.orig/telnet/netlink.cc netkit-telnet-0.10/telnet/ne
 +#endif /* INET6 */
  
  void netlink::oobinline() {
-     /* Systems without SO_OOBINLINE probably won't work */
-diff -urN netkit-telnet-0.10.orig/telnet/netlink.h netkit-telnet-0.10/telnet/netlink.h
---- netkit-telnet-0.10.orig/telnet/netlink.h	Sat May 22 12:27:38 1999
-+++ netkit-telnet-0.10/telnet/netlink.h	Sat May 22 12:28:01 1999
+     int on=1;
+diff -ur netkit-telnet-0.16.orig/telnet/netlink.h netkit-telnet-0.16/telnet/netlink.h
+--- netkit-telnet-0.16.orig/telnet/netlink.h	Tue Sep 28 18:29:24 1999
++++ netkit-telnet-0.16/telnet/netlink.h	Wed Jul 12 16:22:14 2000
 @@ -6,10 +6,14 @@
      netlink();
      ~netlink();
@@ -181,15 +181,15 @@ diff -urN netkit-telnet-0.10.orig/telnet/netlink.h netkit-telnet-0.10/telnet/net
 +#else /* INET6 */
      int connect(int debug, struct hostent *host, 
  		struct sockaddr_in *sin, 
- 		const char *srcroute, int srlen,
+ 		char *srcroute, int srlen,
  		int tos);
 +#endif /* INET6 */
      void close(int doshutdown);
  
      int setdebug(int debug);
-diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/telnetd.c
---- netkit-telnet-0.10.orig/telnetd/telnetd.c	Sat May 22 12:27:38 1999
-+++ netkit-telnet-0.10/telnetd/telnetd.c	Sat May 22 12:28:31 1999
+diff -ur netkit-telnet-0.16.orig/telnetd/telnetd.c netkit-telnet-0.16/telnetd/telnetd.c
+--- netkit-telnet-0.16.orig/telnetd/telnetd.c	Tue Dec 14 01:43:31 1999
++++ netkit-telnet-0.16/telnetd/telnetd.c	Wed Jul 12 16:27:40 2000
 @@ -1,4 +1,22 @@
  /*
 + * IPv6 patch to Linux netkit-telnet-0.10 telnetd by Albert K T Hui
@@ -213,15 +213,15 @@ diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/t
   * Copyright (c) 1989 Regents of the University of California.
   * All rights reserved.
   *
-@@ -46,6 +64,7 @@
+@@ -48,6 +66,7 @@
  #include <netinet/in.h>
- #include <netinet/ip.h>
+ /* #include <netinet/ip.h> */ /* Don't think this is used at all here */
  #include <arpa/inet.h>
 +#include <sys/un.h>
+ #include <assert.h>
  #include "telnetd.h"
  #include "pathnames.h"
- 
-@@ -59,7 +78,11 @@
+@@ -63,7 +82,11 @@
  int	require_SecurID = 0;
  #endif
  
@@ -230,12 +230,12 @@ diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/t
 +#else /* INET6 */
  static void doit(struct sockaddr_in *who);
 +#endif /* INET6 */
- static int terminaltypeok(char *s);
+ static int terminaltypeok(const char *s);
  
  /*
-@@ -86,9 +109,13 @@
+@@ -85,7 +108,11 @@
  int
- main(int argc, char *argv[])
+ main(int argc, char *argv[], char *env[])
  {
 +#ifdef INET6
 +	struct sockaddr_un from;
@@ -243,14 +243,11 @@ diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/t
  	struct sockaddr_in from;
 +#endif /* INET6 */
  	int on = 1;
--	size_t fromlen;
-+	socklen_t fromlen;
+ 	socklen_t fromlen;
  	register int ch;
- 
- #if	defined(IPPROTO_IP) && defined(IP_TOS)
-@@ -290,6 +317,66 @@
+@@ -247,6 +274,66 @@
  	    int s, ns;
- 	    size_t foo;
+ 	    socklen_t foo;
  	    struct servent *sp;
 +#ifdef INET6
 +	    struct addrinfo req, *ai, *ai2;
@@ -312,18 +309,18 @@ diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/t
 +	    close(ns);
 +	    close(s);
 +#else /* INET6 */
- 	    static struct sockaddr_in sn = { AF_INET };
+ 	    struct sockaddr_in sn;
  
- 	    if (argc > 1) {
-@@ -340,6 +427,7 @@
+ 	    memset(&sn, 0, sizeof(sn));
+@@ -301,6 +388,7 @@
  	    (void) dup2(ns, 0);
  	    (void) close(ns);
  	    (void) close(s);
 +#endif /* INET6 */
- #ifdef convex
- 	} else if (argc == 1) {
- 		; /* VOID*/		/* Just ignore the host/port name */
-@@ -377,7 +465,11 @@
+ 	} else if (argc > 0) {
+ 		usage();
+ 		/* NOT REACHED */
+@@ -334,7 +422,11 @@
  	}
  #endif	/* defined(IPPROTO_IP) && defined(IP_TOS) */
  	net = 0;
@@ -335,7 +332,7 @@ diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/t
  	/* NOTREACHED */
  	return 0;
  }  /* end of main */
-@@ -611,7 +703,11 @@
+@@ -603,7 +695,11 @@
   * Get a pty, scan input lines.
   */
  static void
@@ -347,8 +344,8 @@ diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/t
  {
  	const char *host;
  	struct hostent *hp;
-@@ -642,6 +738,11 @@
- #endif
+@@ -618,20 +714,28 @@
+ 		fatal(net, "All network ports in use");
  
  	/* get name of connected client */
 +#ifdef INET6
@@ -359,11 +356,21 @@ diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/t
  	hp = gethostbyaddr((char *)&who->sin_addr, sizeof (struct in_addr),
  		who->sin_family);
  	if (hp)
-@@ -653,6 +754,7 @@
+ 		host = hp->h_name;
+ 	else
+ 		host = inet_ntoa(who->sin_addr);
+-
++ 
++#endif /* INET6 */
+ 	/*
+ 	 * We must make a copy because Kerberos is probably going
  	 * to also do a gethost* and overwrite the static data...
  	 */
- 	strncpy(remote_host_name, host, sizeof(remote_host_name)-1);
+ 	{
+ 		int i;
++#ifndef INET6
+ 		strncpy(remote_host_name, host, sizeof(remote_host_name)-1);
 +#endif /* INET6 */
- 	remote_host_name[sizeof(remote_host_name)-1] = 0;
- 	host = remote_host_name;
+ 		remote_host_name[sizeof(remote_host_name)-1] = 0;
  
+ 		/* Disallow funnies. */
