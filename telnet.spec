@@ -88,12 +88,12 @@ us³ugi telnet.
 %build
 # don't use configure macro
 CC=gcc
-CFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS} -DINET6" \
+CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS} -DINET6" \
 ./configure \
 	--with-c-compiler=gcc \
 	--prefix=%{_prefix}
 
-%{__make} OPT="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS} -D__USE_UNIX98"
+%{__make} OPT="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS} -D__USE_UNIX98"
 
 %install
 rm -rf $RPM_BUILD_ROOT
