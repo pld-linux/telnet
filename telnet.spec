@@ -132,7 +132,7 @@ CFLAGS="%{rpmcflags} -DINET6" \
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}} \
 	$RPM_BUILD_ROOT{%{_applnkdir}/Network,%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT/etc/sysconfig/rc-inetd}
+	$RPM_BUILD_ROOT/etc/sysconfig/rc-inetd
 
 %{__make} INSTALLROOT=$RPM_BUILD_ROOT install
 
