@@ -6,6 +6,6 @@ Comment[de]=Telnet-Client für den textbasierten Remotezugang zu anderen Compute
 Comment[pl]=Klient usługi telnet
 Comment[sv]=Klient för anslutning till fjärrmaskiner via ett textgränssnitt
 Exec=telnet
-Icon=telnet.xpm
+Icon=telnet.png
 Terminal=true
 # vi: encoding=utf-8
