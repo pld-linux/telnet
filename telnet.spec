@@ -13,6 +13,7 @@ License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	%{name}d.inetd
 Source2:	%{name}.desktop
+Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 Patch0:		netkit-%{name}-ipv6.patch
 Patch1:		netkit-%{name}-fixes.patch
 Patch2:		netkit-%{name}-ayt.patch
@@ -141,6 +142,8 @@ install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
 rm -f $RPM_BUILD_ROOT%{_sbindir}/*
 install telnetd/telnetd $RPM_BUILD_ROOT%{_sbindir}
+
+bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
