@@ -9,4 +9,5 @@ Exec=telnet
 Icon=telnet.png
 Terminal=true
 Categories=Network
+Encoding=UTF-8
 # vi: encoding=utf-8
