@@ -5,7 +5,7 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.10
-Release:	33
+Release:	34
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
@@ -20,8 +20,6 @@ Patch5:		telnet-maint.patch
 Patch6:		telnet-utmp.patch
 Patch7:		telnetd-term.patch
 Buildroot:	/tmp/%{name}-%{version}-root
-Requires:	inetdaemon
-Prereq:		rc-inetd
 
 %description
 Telnet is a popular protocol for remote logins across the Internet. This
