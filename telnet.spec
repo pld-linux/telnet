@@ -1,51 +1,46 @@
-Summary:	Client and server for the telnet remote login protocol IPv6
-Summary(de):	Client und Server für das entfernte Login-Protokoll 'telnet'
-Summary(fr):	Client et serveur pour le protocole de connexion telnet.
-Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
+Summary:	Client for the telnet remote login protocol
+Summary(de):	Client für das entfernte Login-Protokoll 'telnet'
+Summary(fr):	Client pour le protocole de connexion telnet
+Summary(pl):	Telnet klient
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	0
+Release:	8
 Group:		Networking
 Group(pl):	Sieciowe
-Copyright:	BSD
-Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-telnet-%{version}.tar.gz
-Source2:	telnetd.inetd
-Patch0:		netkit-telnet-ipv6.patch
-Patch2:		netkit-telnet-fixes.patch
+License:	BSD
+Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
+Source1:	%{name}d.inetd
+Source2:	%{name}.desktop
+Patch0:		netkit-%{name}-ipv6.patch
+Patch2:		netkit-%{name}-fixes.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Telnet is a popular protocol for remote logins across the Internet. This
-package provides a command line telnet client as well as a telnet daemon
-which allows remote logins into the machine it is running on. The telnet
-daemon is enabled by default, and may be disabled by editing /etc/inetd.conf.
+Telnet is a popular protocol for remote logins across the Internet.
+This package provides a command line telnet client.
 
 %description -l de
-Telnet ist ein beliebtes Protokoll für entfernte Logins über das Internet.
-Dieses Paket enthält einen Befehlszeilen-Telnet-Client und einen Telnet-Dämon,
-der entfernte Logins auf dem Rechner, auf dem er läuft, zuläßt. Der Telnet-
-Dämon ist standardmäßig aktiviert. Sie können ihn deaktivieren, indem Sie die
-Datei /etc/inetd.conf. ändern.
+Telnet ist ein beliebtes Protokoll für entfernte Logins über das
+Internet. Dieses Paket enthält einen Befehlszeilen-Telnet-Client.
 
 %description -l fr
-telnet est un protocole très utilisé pour les logins distants sur l'Internet.
-Ce paquetage offre un client telnet en ligne de commande et un démon telnet
-permettant des logins distants sur la machine sur laquelle il tourne. Le
-démon est activé par défaut et peut être désactivé en éditant /etc/inetd.conf.
-
-%description -l tr
-Telnet, Internet üzerinden uzak kullanýcý baðlantýlarý için popüler bir
-protokoldur. Bu paket, bir komut satýrý istemcisi ile birlikte bir sunucu
-süreci içerir. Sunucu sürecin çalýþtýðý makinaya uzak kullanýcýlarýn
-baðlanabilir.
+telnet est un protocole très utilisé pour les logins distants sur
+l'Internet. Ce paquetage offre un client telnet
 
 %description -l pl
-Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na zdalnym
-komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
+Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
+zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera klienta
+us³ugi telnet.
 
-%package -n	telnetd
+%description -l tr
+Telnet, Internet üzerinden uzak kullanýcý baðlantýlarý için popüler
+bir protokoldur. Bu paket, bir komut satýrý istemcisi ile birlikte bir
+sunucu süreci içerir. Sunucu sürecin çalýþtýðý makinaya uzak
+kullanýcýlarýn baðlanabilir.
+
+%package -n telnetd
 Summary:	Server for the telnet remote login protocol
 Summary(de):	Server für das entfernte Login-Protokoll 'telnet'  
 Summary(fr):	Serveur pour le protocole de connexion distante telnet
@@ -59,33 +54,31 @@ Prereq:		rc-inetd >= 0.8
 Obsoletes:	telnet-server
 
 %description -n telnetd
-Telnet is a popular protocol for remote logins across the Internet. This
-package provides a command line telnet client as well as a telnet daemon
-which allows remote logins into the machine it is running on. The telnet
-daemon is enabled by default, and may be disabled by editing /etc/inetd.conf.
+Telnet is a popular protocol for remote logins across the Internet.
+This package provides telnet daemon which allows remote logins into
+the machine it is running on.
 
 %description -l de -n telnetd
-Telnet ist ein beliebtes Protokoll für entfernte Logins über das Internet.
-Dieses Paket enthält einen Befehlszeilen-Telnet-Client und einen Telnet-Dämon,
-der entfernte Logins auf dem Rechner, auf dem er läuft, zuläßt. Der Telnet-
-Dämon ist standardmäßig aktiviert. Sie können ihn deaktivieren, indem Sie die
-Datei /etc/inetd.conf. ändern.
+Telnet ist ein beliebtes Protokoll für entfernte Logins über das
+Internet. Dieses Paket enthält einen Telnet-Dämon, der entfernte
+Logins auf dem Rechner, auf dem er läuft, zuläßt. Der Telnet- Dämon
+ist standardmäßig aktiviert.
 
 %description -l fr -n telnetd
-telnet est un protocole très utilisé pour les logins distants sur l'Internet.
-Ce paquetage offre un client telnet en ligne de commande et un démon telnet
-permettant des logins distants sur la machine sur laquelle il tourne. Le
-démon est activé par défaut et peut être désactivé en éditant /etc/inetd.conf.
+telnet est un protocole très utilisé pour les logins distants sur
+l'Internet. Ce paquetage offre démon telnet permettant des logins
+distants sur la machine sur laquelle il tourne.
 
 %description -l tr -n telnetd
-Telnet, Internet üzerinden uzak kullanýcý baðlantýlarý için popüler bir
-protokoldur. Bu paket, bir komut satýrý istemcisi ile birlikte bir sunucu
-süreci içerir. Sunucu sürecin çalýþtýðý makinaya uzak kullanýcýlarýn
-baðlanabilir.
+Telnet, Internet üzerinden uzak kullanýcý baðlantýlarý için popüler
+bir protokoldur. Bu paket, bir komut satýrý istemcisi ile birlikte bir
+sunucu süreci içerir. Sunucu sürecin çalýþtýðý makinaya uzak
+kullanýcýlarýn baðlanabilir.
 
 %description -l pl -n telnetd
-Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na zdalnym
-komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
+Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
+zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera serwer
+us³ugi telnet.
 
 %prep
 %setup -q -n netkit-%{name}-%{version}
@@ -103,12 +96,13 @@ CFLAGS="$RPM_OPT_FLAGS -DINET6"; export CFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}} \
+	$RPM_BUILD_ROOT{%{_applnkdir}/Network,/etc/sysconfig/rc-inetd}
 
 %{__make} INSTALLROOT=$RPM_BUILD_ROOT install
 
-install -d $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnetd
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnetd
+install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network
 
 rm -f 	$RPM_BUILD_ROOT%{_mandir}/man8/*
 install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
@@ -138,9 +132,8 @@ fi
 
 %files
 %defattr(644,root,root,755)
-#%config(missingok) /etc/X11/wmconfig/telnet
-
 %attr(755,root,root) %{_bindir}/*
+%{_applnkdir}/Network
 %{_mandir}/man1/*
 
 %files -n telnetd
