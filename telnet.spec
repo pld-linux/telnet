@@ -54,6 +54,7 @@ Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Group:		Networking
 Group(pl):	Sieciowe
 Requires:	inetdaemon
+Requires:	login
 Prereq:		rc-inetd >= 0.8
 
 %description -n telnetd
