@@ -145,7 +145,7 @@ diff -ur netkit-telnet-0.16.orig/telnet/netlink.cc netkit-telnet-0.16/telnet/net
 +	return 0;
 +    }
 +
-+    if (debug && SetSockOpt(net, SOL_SOCKET, SO_DEBUG, 1) < 0) {
++    if (debug && setsockopt(net, SOL_SOCKET, SO_DEBUG, &debug, sizeof(debug)) < 0) {
 +	perror("setsockopt (SO_DEBUG)");
 +    }
 +
