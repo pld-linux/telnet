@@ -5,7 +5,7 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.16
-Release:	3
+Release:	4
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
@@ -92,7 +92,8 @@ komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 
 %build
 # don't use configure macro
-CFLAGS="$RPM_OPT_FLAGS"; export CFLAGS
+CC=gcc ; export CC
+CFLAGS="$RPM_OPT_FLAGS -DINET6"; export CFLAGS
 ./configure \
 	--prefix=%{_prefix}
 
