@@ -5,7 +5,7 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.16
-Release:	1
+Release:	2
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
