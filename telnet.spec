@@ -11,13 +11,13 @@ Group(pl):	Sieciowe
 Copyright:	BSD
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-telnet-%{version}.tar.gz
 Source2:	telnetd.inetd
-#Patch0:		netkit-telnet-ipv6.patch
-#Patch1:		netkit-telnet-ptmx.patch
-#Patch2:		netkit-telnet-fixes.patch
-#Patch3:		netkit-telnet-c++.patch
-#Patch4:		netkit-telnet-openpty.patch
-#Patch5:		telnet-maint.patch
-#Patch6:		telnet-utmp.patch
+Patch0:		netkit-telnet-ipv6.patch
+Patch1:		netkit-telnet-ptmx.patch
+Patch2:		netkit-telnet-fixes.patch
+Patch3:		netkit-telnet-c++.patch
+Patch4:		netkit-telnet-openpty.patch
+Patch5:		telnet-maint.patch
+Patch6:		telnet-utmp.patch
 Patch7:		telnetd-term.patch
 BuildRequires:	ncurses-devel >= 5.0
 Prereq:		rc-inetd >= 0.8
@@ -93,13 +93,13 @@ komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 
 %prep
 %setup -q -n netkit-%{name}-%{version}
-#%patch0 -p1 
-#%patch1 -p1 
-#%patch2 -p1 
-#%patch3 -p1 
-#%patch4 -p1
-#%patch5 -p1
-#%patch6 -p1
+%patch0 -p1 
+%patch1 -p1 
+%patch2 -p1 
+%patch3 -p1 
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
 %patch7 -p1
 
 %build
