@@ -7,7 +7,7 @@ Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	21
+Release:	22
 Group:		Networking
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -20,8 +20,8 @@ Patch2:		netkit-%{name}-ayt.patch
 Patch3:		netkit-%{name}-issue.patch
 Patch4:		netkit-%{name}-cpp.patch
 Patch5:		netkit-%{name}-pld_man.patch
-BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gcc-c++
+BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -144,6 +144,7 @@ rm -f $RPM_BUILD_ROOT%{_sbindir}/*
 install telnetd/telnetd $RPM_BUILD_ROOT%{_sbindir}
 
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+rm -f $RPM_BUILD_ROOT%{_mandir}/*/*/*.old
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -167,11 +168,19 @@ fi
 %attr(755,root,root) %{_bindir}/*
 %{_applnkdir}/Network/telnet.desktop
 %{_mandir}/man1/*
+%lang(es) %{_mandir}/es/man1/*
+%lang(hu) %{_mandir}/hu/man1/*
+%lang(ja) %{_mandir}/ja/man1/*
+%lang(ko) %{_mandir}/ko/man1/*
 
 %files -n telnetd
 %defattr(644,root,root,755)
 %doc BUGS README
 %attr(640,root,root) %config(noreplace) %verify(not mtime md5 size) /etc/sysconfig/rc-inetd/telnetd
-
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[58]/*
+%lang(es) %{_mandir}/es/man[58]/*
+%lang(fr) %{_mandir}/fr/man[58]/*
+%lang(ja) %{_mandir}/ja/man[58]/*
+%lang(ko) %{_mandir}/ko/man[58]/*
+%lang(pl) %{_mandir}/pl/man[58]/*

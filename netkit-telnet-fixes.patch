@@ -36,15 +36,3 @@ diff -Naur netkit-telnet-0.16/configure netkit-telnet-0.16-p/configure
      fi
  
      if [ x$CXX_WARNINGS != x ]; then
-diff -Naur netkit-telnet-0.16/telnet/Makefile netkit-telnet-0.16-p/telnet/Makefile
---- netkit-telnet-0.16/telnet/Makefile	Sun Aug  1 07:06:37 1999
-+++ netkit-telnet-0.16-p/telnet/Makefile	Wed Jul 12 16:46:50 2000
-@@ -7,7 +7,7 @@
- 
- # -DAUTHENTICATE
- CXXFLAGS += -DUSE_TERMIO -DKLUDGELINEMODE
--LIBS += $(LIBTERMCAP)
-+LIBS += $(LIBTERMCAP) -lresolv
- 
- SRCS = commands.cc main.cc network.cc ring.cc sys_bsd.cc telnet.cc \
- 	terminal.cc tn3270.cc utilities.cc genget.cc environ.cc netlink.cc
