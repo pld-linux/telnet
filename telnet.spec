@@ -5,12 +5,12 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.10
-Release:	12d
-Copyright:	BSD
+Release:	13
 Group:		Networking
 Group(pl):	Sieciowe
+Copyright:	BSD
 URL:		ftp://sunsite.unc.edu/pub/Linux/system/network/daemons
-Source:		netkit-telnet-%{version}.tar.gz
+Source0:	netkit-telnet-%{version}.tar.gz
 Source1:	telnet.wmconfig
 Patch0:		netkit-telnet-0.10-misc.patch.gz
 ######		ftp://ftp.bieringer.de/pub/linux/IPv6/telnet
@@ -21,7 +21,7 @@ Patch4:		netkit-telnet.compile.diff
 Patch5:		netkit-telnet-0.10-ptmx.patch
 Patch6:		netkit-telnet-telnetd.patch
 Patch7:		netkit-telnet-man.patch
-Buildroot:	/tmp/%{name}-%{version}-buildroot
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 Telnet is a popular protocol for remote logins across the Internet. This
@@ -123,28 +123,32 @@ install telnetd/*.8 $RPM_BUILD_ROOT/usr/man/man8
 rm -f 	$RPM_BUILD_ROOT/usr/sbin/*
 install -s telnetd/telnetd $RPM_BUILD_ROOT/usr/sbin
 
-gzip -9fn $RPM_BUILD_ROOT/usr/man/man[158]/*
-bzip2 -9  BUGS README
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man[158]/*
+gzip -9nf BUGS README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-
 %config(missingok) /etc/X11/wmconfig/telnet
 
 %attr(755,root,root) /usr/bin/*
-%attr(644,root, man) /usr/man/man1/*
+/usr/man/man1/*
 
 %files -n telnetd
 %defattr(644,root,root,755)
-%doc {BUGS,README}.bz2
+%doc {BUGS,README}.gz
 
 %attr(755,root,root) /usr/sbin/*
-%attr(644,root, man) /usr/man/man[58]/*
+/usr/man/man[58]/*
 
 %changelog
+* Mon Apr 26 1999 Micha³ Kuratczyk <kura@pld.org.pl>
+  [0.10-13]
+- removed man group from man pages
+- gzipping documentation instead bzipping
+
 * Wed Feb 17 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
   [0.10-12d]
 - added telned patch,
