@@ -4,12 +4,12 @@ Summary(fr):	Client et serveur pour le protocole de connexion telnet.
 Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
-Version:	0.16
-Release:	4
+Version:	0.17
+Release:	0
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
-Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-telnet-%{version}.tar.gz
+Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-telnet-%{version}.tar.gz
 Source2:	telnetd.inetd
 Patch0:		netkit-telnet-ipv6.patch
 Patch2:		netkit-telnet-fixes.patch
