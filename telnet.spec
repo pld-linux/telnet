@@ -103,8 +103,7 @@ komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 %patch7 -p1 
 
 %build
-./configure \
-    --prefix=/usr 
+%configure 
 
 make OPT="$RPM_OPT_FLAGS"
 
