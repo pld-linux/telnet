@@ -18,6 +18,8 @@ Patch1:		netkit-telnet-ptmx.patch
 Patch2:		netkit-telnet-fixes.patch
 Patch3:		netkit-telnet-c++.patch
 Buildroot:	/tmp/%{name}-%{version}-root
+Requires:	inetdaemon
+Requires:	rc-inetd
 
 %description
 Telnet is a popular protocol for remote logins across the Internet. This
