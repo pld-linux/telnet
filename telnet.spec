@@ -12,7 +12,7 @@ Copyright:	BSD
 URL:		ftp://sunsite.unc.edu/pub/Linux/system/network/daemons
 Source0:	netkit-telnet-%{version}.tar.gz
 #Source1:	%{name}.wmconfig
-Source2:	%{name}.rc-inetd
+Source2:	%{name}.inetd
 Patch0:		netkit-telnet-ipv6.patch
 Patch1:		netkit-telnet-ptmx.patch
 Patch2:		netkit-telnet-fixes.patch
