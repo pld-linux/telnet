@@ -133,37 +133,3 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[58]/*
-
-%changelog
-* Mon Apr 26 1999 Micha³ Kuratczyk <kura@pld.org.pl>
-  [0.10-13]
-- removed man group from man pages
-- gzipping documentation instead bzipping
-
-* Wed Feb 17 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [0.10-12d]
-- added telned patch,
-- fixed Group(pl),
-
-  by Marcin Dalecki <dalecki@cs.net.pl>
-
-- added ptmx patch to handle /dev/pts.   
-
-* Sun Dec 06 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
-  [0.10-8d]
-- build for PLD,
-- major changes.
-
-* Wed Nov 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.10-6]
-- added -q %setup parameter,
-- changed Buildroot to /tmp/%%{name}-%%{version}-root,
-- added using %%{name} and %%{version} in Source,
-- fixed passing $RPM_OPT_FLAGS,
-- telnet damon in separated package,
-
-* Wed Jun 17 1998 Maciej W. Ro¿ycki <macro@ds2.pg.gda.pl>
-- added IPv6 support
-- compiled against glibc 2.0.94
-- added telnet client IPv6 patch (based on inet6-apps)
-- start at RH spec file.
