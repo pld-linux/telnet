@@ -11,7 +11,6 @@ Group(pl):	Sieciowe
 Copyright:	BSD
 URL:		ftp://sunsite.unc.edu/pub/Linux/system/network/daemons
 Source0:	netkit-telnet-%{version}.tar.gz
-#Source1:	%{name}.wmconfig
 Source2:	telnetd.inetd
 Patch0:		netkit-telnet-ipv6.patch
 Patch1:		netkit-telnet-ptmx.patch
@@ -104,14 +103,9 @@ make OPT="$RPM_OPT_FLAGS -D__USE_UNIX98"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
-install -d $RPM_BUILD_ROOT%{_sbindir}
-install -d $RPM_BUILD_ROOT%{_mandir}/man{1,5,8}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}}
 
 make INSTALLROOT=$RPM_BUILD_ROOT install
-
-#install -d $RPM_BUILD_ROOT/etc/X11/wmconfig/
-#install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/telnet
 
 install -d $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnetd
@@ -122,8 +116,8 @@ install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
 rm -f 	$RPM_BUILD_ROOT%{_sbindir}/*
 install -s telnetd/telnetd $RPM_BUILD_ROOT%{_sbindir}
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man[158]/*
-gzip -9nf BUGS README
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man[158]/* \
+	BUGS README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
