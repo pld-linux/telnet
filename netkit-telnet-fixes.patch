@@ -1,0 +1,202 @@
+diff -urN netkit-telnet-0.10.orig/MCONFIG netkit-telnet-0.10/MCONFIG
+--- netkit-telnet-0.10.orig/MCONFIG	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/MCONFIG	Sat May 22 12:37:37 1999
+@@ -33,7 +33,7 @@
+ WARNINGS= -Wall -W -Wpointer-arith -Wbad-function-cast -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Winline -Wcast-align
+ 
+ # Compiler flags to use
+-CFLAGS= -pipe -O2 -D__USE_BSD_SIGNAL $(WARNINGS)
++CFLAGS= -pipe -O2 -D__USE_BSD_SIGNAL -D__USE_UNIX98 $(RPM_OPT_FLAGS)
+ 
+ # Link-time flags to use
+ LDFLAGS= -s
+@@ -49,7 +49,7 @@
+ 
+ 
+ # Work around GNU libc lossage
+-USE_GLIBC=0
++USE_GLIBC=1
+ 
+ 
+ 
+diff -urN netkit-telnet-0.10.orig/configure netkit-telnet-0.10/configure
+--- netkit-telnet-0.10.orig/configure	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/configure	Sat May 22 12:38:05 1999
+@@ -53,7 +53,7 @@
+ 
+ BINDIR="$EXECPREFIX/bin"
+ SBINDIR="$EXECPREFIX/sbin"
+-MANDIR="$PREFIX/man"
++MANDIR="/usr/share/man"
+ 
+ echo "Directories: $ROOTBINDIR $BINDIR $SBINDIR $MANDIR"
+ if [ x$INSTALLROOT != x ]; then
+@@ -370,7 +370,7 @@
+ 	echo "no"
+ else
+ 	echo "yes"
+-	CFLAGS="${CFLAGS} -O2"
++	CFLAGS="${CFLAGS}"
+ fi
+ 
+ 
+@@ -601,10 +601,10 @@
+ echo "CC=$CC" >>MCONFIG
+ echo >>MCONFIG
+ echo "# Compiler warnings" >>MCONFIG
+-echo "WARNINGS=$WARNINGS" >>MCONFIG
++echo "WARNINGS=" >>MCONFIG
+ echo >>MCONFIG
+ echo "# Compiler flags to use" >>MCONFIG
+-echo "CFLAGS=$CFLAGS" >>MCONFIG
++echo "CFLAGS=$CFLAGS -DINET6 \$(OPT)" >>MCONFIG
+ echo >>MCONFIG
+ echo "# Link-time flags to use" >>MCONFIG
+ echo "LDFLAGS=$LDFLAGS" >>MCONFIG
+diff -urN netkit-telnet-0.10.orig/telnet/Makefile netkit-telnet-0.10/telnet/Makefile
+--- netkit-telnet-0.10.orig/telnet/Makefile	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/telnet/Makefile	Sat May 22 12:37:37 1999
+@@ -11,7 +11,7 @@
+ 
+ # -DAUTHENTICATE
+ CFLAGS += -DUSE_TERMIO -DKLUDGELINEMODE
+-LIBS += $(LIBTERMCAP)
++LIBS += $(LIBTERMCAP) -lresolv
+ 
+ SRCS = commands.cc main.cc network.cc ring.cc sys_bsd.cc telnet.cc \
+ 	terminal.cc tn3270.cc utilities.cc genget.cc environ.cc netlink.cc
+diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/commands.cc
+--- netkit-telnet-0.10.orig/telnet/commands.cc	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/telnet/commands.cc	Sat May 22 12:37:37 1999
+@@ -335,19 +335,19 @@
+     int what;			/* Character to be sent (<0 ==> special) */
+ };
+ 
+-static int send_esc(char *, char *);
+-static int send_help(char *, char *);
+-static int send_docmd(char *, char *);
+-static int send_dontcmd(char *, char *);
+-static int send_willcmd(char *, char *);
+-static int send_wontcmd(char *, char *);
++static int send_esc(const char *, const char *);
++static int send_help(const char *, const char *);
++static int send_docmd(const char *, const char *);
++static int send_dontcmd(const char *, const char *);
++static int send_willcmd(const char *, const char *);
++static int send_wontcmd(const char *, const char *);
+ 
+ extern int send_do(int, int);
+ extern int send_dont(int, int);
+ extern int send_will(int, int);
+ extern int send_wont(int, int);
+ 
+-static int dosynch1(char *, char *) { return dosynch(); }
++static int dosynch1(const char *, const char *) { return dosynch(); }
+ 
+ static struct sendlist Sendlist[] = {
+     { "ao",	"Send Telnet Abort output",		1, 0, 0, 2, AO },
+@@ -463,24 +463,24 @@
+     return (count == success);
+ }
+ 
+-static int send_esc(char *, char *) {
++static int send_esc(const char *, const char *) {
+     NETADD(escapechar);
+     return 1;
+ }
+ 
+-static int send_docmd(char *name, char *) {
++static int send_docmd(const char *name, const char *) {
+     return send_tncmd(send_do, "do", name);
+ }
+ 
+-static int send_dontcmd(char *name, char *) {
++static int send_dontcmd(const char *name, const char *) {
+     return(send_tncmd(send_dont, "dont", name));
+ }
+ 
+-static int send_willcmd(char *name, char *) {
++static int send_willcmd(const char *name, const char *) {
+     return(send_tncmd(send_will, "will", name));
+ }
+ 
+-static int send_wontcmd(char *name, char *) {
++static int send_wontcmd(const char *name, const char *) {
+     return(send_tncmd(send_wont, "wont", name));
+ }
+ 
+@@ -526,7 +526,7 @@
+     return 1;
+ }
+ 
+-static int send_help(char *, char *) {
++static int send_help(const char *, const char *) {
+     struct sendlist *s;	/* pointer to current command */
+     for (s = Sendlist; s->name; s++) {
+ 	if (s->help)
+diff -urN netkit-telnet-0.10.orig/telnet/externs.h netkit-telnet-0.10/telnet/externs.h
+--- netkit-telnet-0.10.orig/telnet/externs.h	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/telnet/externs.h	Sat May 22 12:37:37 1999
+@@ -218,7 +218,7 @@
+ void env_opt_add(const char *);
+ void env_opt_end(int);
+ 
+-int get_status(char *, char *);
++int get_status(const char *, const char *);
+ int dosynch(void);
+ 
+ cc_t *tcval(int);
+diff -urN netkit-telnet-0.10.orig/telnet/telnet.cc netkit-telnet-0.10/telnet/telnet.cc
+--- netkit-telnet-0.10.orig/telnet/telnet.cc	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/telnet/telnet.cc	Sat May 22 12:37:37 1999
+@@ -57,7 +57,7 @@
+ #include "netlink.h"
+ #include "terminal.h"
+ 
+-#include <term.h>
++#include <termios.h>
+ 
+ #define	strip(x)	((x)&0x7f)
+ 
+@@ -1927,7 +1927,7 @@
+ 
+ int want_status_response = 0;
+ 
+-int get_status(char *, char *) {
++int get_status(const char *, const char *) {
+     char tmp[16];
+     register char *cp;
+ 
+diff -urN netkit-telnet-0.10.orig/telnetd/sys_term.c netkit-telnet-0.10/telnetd/sys_term.c
+--- netkit-telnet-0.10.orig/telnetd/sys_term.c	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/telnetd/sys_term.c	Sat May 22 12:37:37 1999
+@@ -1268,13 +1268,13 @@
+ 	*argv = NULL;
+     }
+     for (cpp = argv; *cpp; cpp++);
+-    if (cpp == &argv[(int)argv[-1]]) {
++    if (cpp == &argv[(long int)argv[-1]]) {
+ 	--argv;
+-	*argv = (char *)((int)(argv[0]) + 10);
+-	argv = realloc(argv, (int)(argv[0]) + 2);
++	*argv = (char *)((long int)(argv[0]) + 10);
++	argv = realloc(argv, (long int)(argv[0]) + 2);
+ 	if (argv == NULL) return NULL;
+ 	argv++;
+-	cpp = &argv[(int)argv[-1] - 10];
++	cpp = &argv[(long int)argv[-1] - 10];
+     }
+     *cpp++ = val;
+     *cpp = 0;
+diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/telnetd.c
+--- netkit-telnet-0.10.orig/telnetd/telnetd.c	Sat May 22 12:37:31 1999
++++ netkit-telnet-0.10/telnetd/telnetd.c	Sat May 22 12:37:37 1999
+@@ -60,7 +60,7 @@
+   "$Id$";
+ 
+ #include <netdb.h>
+-#include <termcap.h>
++#include <termios.h>
+ #include <netinet/in.h>
+ #include <netinet/ip.h>
+ #include <arpa/inet.h>

@@ -1,0 +1,369 @@
+diff -urN netkit-telnet-0.10.orig/telnet/commands.cc netkit-telnet-0.10/telnet/commands.cc
+--- netkit-telnet-0.10.orig/telnet/commands.cc	Sat May 22 12:27:38 1999
++++ netkit-telnet-0.10/telnet/commands.cc	Sat May 22 12:28:01 1999
+@@ -101,7 +101,11 @@
+ 
+ 
+ char	*hostname;
++#ifdef INET6
++static char _hostname[NI_MAXHOST];
++#else /* INET6 */
+ static char _hostname[MAXHOSTNAMELEN];
++#endif /* INET6 */
+ 
+ //typedef int (*intrtn_t)(int argc, const char *argv[]);
+ 
+@@ -1619,7 +1623,6 @@
+ 
+ int tn(int argc, const char *argv[]) {
+     register struct hostent *host = 0;
+-    struct sockaddr_in sn;
+     struct servent *sp = 0;
+     char *srp = NULL;
+     int srlen;
+@@ -1628,8 +1631,17 @@
+     const char *portp = NULL;
+     char *hostp = NULL;
+ 
++#ifdef INET6
++    struct addrinfo req, *ai;
++    int i;
++#else /* INET6 */
++    struct sockaddr_in sn;
++#endif /* INET6 */
++
++#ifndef INET6
+     /* clear the socket address prior to use */
+     memset(&sn, 0, sizeof(sn));
++#endif /* INET6 */
+ 
+     if (connected) {
+ 	printf("?Already connected to %s\n", hostname);
+@@ -1681,11 +1693,11 @@
+     if (hostp == 0)
+ 	goto usage;
+ 
+-#if defined(IP_OPTIONS) && defined(HAS_IPPROTO_IP)
+     if (hostp[0] == '@' || hostp[0] == '!') {
+ 	if ((hostname = strrchr(hostp, ':')) == NULL)
+ 	    hostname = strrchr(hostp, '@');
+ 	hostname++;
++#if defined(IP_OPTIONS) && defined(HAS_IPPROTO_IP) && !defined (INET6)
+ 	srp = 0;
+ 	int temp = sourceroute(hostp, &srp, &srlen);
+ 	if (temp == 0) {
+@@ -1702,7 +1714,56 @@
+ 	}
+     } 
+     else {
+-#endif
++#else /* IP_OPTIONS && HAS_IPPROTO_IP && !INET6 */
++	printf("Source routing not available in this implementation.\n");
++	hostp = hostname;
++    }
++    {
++#endif /* IP_OPTIONS && HAS_IPPROTO_IP && !INET6 */
++#ifdef INET6
++	telnetport = 1;
++	if (portp) {
++	    if (*portp == '-')
++		portp++;
++	    else
++		telnetport--;
++	} else
++	    portp = "telnet";
++	memset(&req, 0, sizeof(req));
++	req.ai_socktype = SOCK_STREAM;
++	if (i = getaddrinfo(hostp, portp, &req, &ai)) {
++	    printf("telnet: getaddrinfo: %s\n", gai_strerror(i));
++	    setuid(getuid());
++	    return 0;
++	}
++	for (; ai; ai = ai->ai_next) {
++	    char hbuf[NI_MAXHOST], sbuf[NI_MAXSERV];
++
++	    if (i = getnameinfo(ai->ai_addr, SA_LEN(ai->ai_addr), hbuf, sizeof(hbuf), sbuf, sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV)) {
++		printf("telnet: getnameinfo: %s\n", gai_strerror(i));
++		continue;
++	    }
++	    printf("Trying %s.%s...\n", hbuf, sbuf);
++	    if (nlink.connect(debug, ai)) {
++		connected++;
++		break;
++	    } else
++		continue;
++	}
++	if (!connected) {
++	    freeaddrinfo(ai);
++	    printf("telnet: no connections result\n");
++	    setuid(getuid());
++	    return 0;
++	}
++	if (i = getnameinfo(ai->ai_addr, SA_LEN(ai->ai_addr), _hostname, sizeof(_hostname), NULL, 0, 0)) {
++	    printf("telnet: getnameinfo: %s\n", gai_strerror(i));
++	    strcpy(_hostname, hostp);
++	}
++	freeaddrinfo(ai);
++	hostname = _hostname;
++    }
++#else /* INET6 */
+ 	if (inet_aton(hostp, &sn.sin_addr)) {
+ 	    sn.sin_family = AF_INET;
+ 	    strcpy(_hostname, hostp);
+@@ -1730,9 +1791,7 @@
+ 		return 0;
+ 	    }
+ 	}
+-#if defined(IP_OPTIONS) && defined(HAS_IPPROTO_IP)
+     }
+-#endif
+     if (portp) {
+ 	if (*portp == '-') {
+ 	    portp++;
+@@ -1773,6 +1832,7 @@
+ 	else if (x==1) continue;
+ 	connected++;
+     } while (connected == 0);
++#endif /* INET6 */
+     cmdrc(hostp, hostname);
+     if (autologin && user == NULL) {
+ 	struct passwd *pw;
+diff -urN netkit-telnet-0.10.orig/telnet/netlink.cc netkit-telnet-0.10/telnet/netlink.cc
+--- netkit-telnet-0.10.orig/telnet/netlink.cc	Sat May 22 12:27:38 1999
++++ netkit-telnet-0.10/telnet/netlink.cc	Sat May 22 12:28:01 1999
+@@ -113,6 +113,28 @@
+     ::close(net);
+ }
+ 
++#ifdef INET6
++int netlink::connect(int debug, struct addrinfo *ai)
++{
++    net = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
++    setuid(getuid());
++    if (net < 0) {
++	perror("telnet: socket");
++	return 0;
++    }
++
++    if (debug && SetSockOpt(net, SOL_SOCKET, SO_DEBUG, 1) < 0) {
++	perror("setsockopt (SO_DEBUG)");
++    }
++
++    if (::connect(net, ai->ai_addr, ai->ai_addrlen) < 0) {
++	::close(net);
++	perror("telnet: Unable to connect to remote host");
++	return 0;
++    }
++    return 2;
++}
++#else /* INET6 */
+ int netlink::connect(int debug, struct hostent *host, 
+ 		     struct sockaddr_in *sn, 
+ 		     const char *srcroute, int srlen, int tos) 
+@@ -171,7 +193,7 @@
+     }
+     return 2;
+ }
+-
++#endif /* INET6 */
+ 
+ void netlink::oobinline() {
+     /* Systems without SO_OOBINLINE probably won't work */
+diff -urN netkit-telnet-0.10.orig/telnet/netlink.h netkit-telnet-0.10/telnet/netlink.h
+--- netkit-telnet-0.10.orig/telnet/netlink.h	Sat May 22 12:27:38 1999
++++ netkit-telnet-0.10/telnet/netlink.h	Sat May 22 12:28:01 1999
+@@ -6,10 +6,14 @@
+     netlink();
+     ~netlink();
+ 
++#ifdef INET6
++    int connect(int debug, struct addrinfo *ai);
++#else /* INET6 */
+     int connect(int debug, struct hostent *host, 
+ 		struct sockaddr_in *sin, 
+ 		const char *srcroute, int srlen,
+ 		int tos);
++#endif /* INET6 */
+     void close(int doshutdown);
+ 
+     int setdebug(int debug);
+diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/telnetd.c
+--- netkit-telnet-0.10.orig/telnetd/telnetd.c	Sat May 22 12:27:38 1999
++++ netkit-telnet-0.10/telnetd/telnetd.c	Sat May 22 12:28:31 1999
+@@ -1,4 +1,22 @@
+ /*
++ * IPv6 patch to Linux netkit-telnet-0.10 telnetd by Albert K T Hui
++ * <avatar@acm.org>.  IPv6 codes written by Craig Metz and NRL.
++ */
++/*
++%%% portions-copyright-cmetz-97
++Portions of this software are Copyright 1997 by Craig Metz, All Rights
++Reserved. The Inner Net License Version 2 applies to these portions of
++the software.
++You should have received a copy of the license with this software. If
++you didn't get a copy, you may request one from <license@inner.net>.
++
++*/
++/*
++ * This file has been slightly modified by NRL for use with IPv6+IPsec.
++ * Search for INET6 and/or IPSEC to see the blocks where this happened.
++ * See the NRL Copyright notice for conditions on the modifications.
++ */
++/*
+  * Copyright (c) 1989 Regents of the University of California.
+  * All rights reserved.
+  *
+@@ -46,6 +64,7 @@
+ #include <netinet/in.h>
+ #include <netinet/ip.h>
+ #include <arpa/inet.h>
++#include <sys/un.h>
+ #include "telnetd.h"
+ #include "pathnames.h"
+ 
+@@ -59,7 +78,11 @@
+ int	require_SecurID = 0;
+ #endif
+ 
++#ifdef INET6
++static void doit(struct sockaddr *who, socklen_t wholen);
++#else /* INET6 */
+ static void doit(struct sockaddr_in *who);
++#endif /* INET6 */
+ static int terminaltypeok(char *s);
+ 
+ /*
+@@ -86,9 +109,13 @@
+ int
+ main(int argc, char *argv[])
+ {
++#ifdef INET6
++	struct sockaddr_un from;
++#else /* INET6 */
+ 	struct sockaddr_in from;
++#endif /* INET6 */
+ 	int on = 1;
+-	size_t fromlen;
++	socklen_t fromlen;
+ 	register int ch;
+ 
+ #if	defined(IPPROTO_IP) && defined(IP_TOS)
+@@ -290,6 +317,66 @@
+ 	    int s, ns;
+ 	    size_t foo;
+ 	    struct servent *sp;
++#ifdef INET6
++	    struct addrinfo req, *ai, *ai2;
++	    char hbuf[NI_MAXHOST], sbuf[NI_MAXSERV];
++
++	    if (argc > 2) {
++		usage();
++		/* NOT REACHED */
++	    }
++
++	    memset(&req, 0, sizeof(struct addrinfo));
++	    req.ai_flags |= AI_PASSIVE;
++	    req.ai_socktype = SOCK_STREAM;
++
++	    {
++	      char *service = (argc > 0) ? *(argv++) : "telnet";
++	      char *host = (argc > 1) ? *argv : NULL;
++
++	      if (s = getaddrinfo(host, service, &req, &ai)) {
++		fprintf(stderr, "telnetd: %s.%s: %s\n", host, service, gai_strerror(s));
++		usage();
++		/* NOT REACHED */
++	      }
++	    }
++
++	    for (ai2 = ai, s = -1, ns = 1; ns && ai; ai = ai->ai_next) {
++	      if (getnameinfo(ai->ai_addr, ai->ai_addrlen, hbuf, sizeof(hbuf), sbuf, sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV) < 0) {
++		fprintf(stderr, "telnetd: getnameinfo() failed\n");
++		continue;
++	      }
++	      printf("Trying %s.%s...\n", hbuf, sbuf);
++
++	      if (s >= 0)
++		close(s);
++
++	      if ((s = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol)) < 0) {
++		perror("telnetd: socket");
++		continue;
++	      }
++	      setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char *)&on, sizeof(on));
++
++	      if (bind(s, ai->ai_addr, ai->ai_addrlen)) {
++		perror("bind");
++		continue;
++	      }
++
++	      if (listen(s, 1) < 0) {
++		perror("listen");
++		continue;
++	      }
++	    }
++
++	    if ((ns = accept(s, NULL, 0)) < 0) {
++	      perror("accept");
++	      exit(1);
++	    }
++
++	    dup2(ns, 0);
++	    close(ns);
++	    close(s);
++#else /* INET6 */
+ 	    static struct sockaddr_in sn = { AF_INET };
+ 
+ 	    if (argc > 1) {
+@@ -340,6 +427,7 @@
+ 	    (void) dup2(ns, 0);
+ 	    (void) close(ns);
+ 	    (void) close(s);
++#endif /* INET6 */
+ #ifdef convex
+ 	} else if (argc == 1) {
+ 		; /* VOID*/		/* Just ignore the host/port name */
+@@ -377,7 +465,11 @@
+ 	}
+ #endif	/* defined(IPPROTO_IP) && defined(IP_TOS) */
+ 	net = 0;
++#ifdef INET6
++	doit((struct sockaddr *)&from, fromlen);
++#else /* INET6 */
+ 	doit(&from);
++#endif /* INET6 */
+ 	/* NOTREACHED */
+ 	return 0;
+ }  /* end of main */
+@@ -611,7 +703,11 @@
+  * Get a pty, scan input lines.
+  */
+ static void
++#ifdef INET6
++doit(struct sockaddr *who, socklen_t wholen)
++#else /* INET6 */
+ doit(struct sockaddr_in *who)
++#endif
+ {
+ 	const char *host;
+ 	struct hostent *hp;
+@@ -642,6 +738,11 @@
+ #endif
+ 
+ 	/* get name of connected client */
++#ifdef INET6
++	if (getnameinfo(who, wholen, remote_host_name, sizeof(remote_host_name), NULL, 0, 0)) {
++		fatal(net, "getnameinfo() failed\n");
++	}
++#else /* INET6 */
+ 	hp = gethostbyaddr((char *)&who->sin_addr, sizeof (struct in_addr),
+ 		who->sin_family);
+ 	if (hp)
+@@ -653,6 +754,7 @@
+ 	 * to also do a gethost* and overwrite the static data...
+ 	 */
+ 	strncpy(remote_host_name, host, sizeof(remote_host_name)-1);
++#endif /* INET6 */
+ 	remote_host_name[sizeof(remote_host_name)-1] = 0;
+ 	host = remote_host_name;
+ 
