@@ -134,7 +134,7 @@ CFLAGS="%{rpmcflags} -DINET6" \
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Network,%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT/etc/sysconfig/rc-inetd
 
 %{__make} INSTALLROOT=$RPM_BUILD_ROOT install
@@ -172,7 +172,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/Network/telnet.desktop
+%{_desktopdir}telnet.desktop
 %{_pixmapsdir}/telnet.png
 %{_mandir}/man1/*
 %lang(es) %{_mandir}/es/man1/*
