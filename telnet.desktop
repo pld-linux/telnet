@@ -8,4 +8,5 @@ Comment[sv]=Klient för anslutning till fjärrmaskiner via ett textgränssnitt
 Exec=telnet
 Icon=telnet.png
 Terminal=true
+Categories=Network
 # vi: encoding=utf-8
