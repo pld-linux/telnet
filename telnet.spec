@@ -5,7 +5,7 @@ Summary(pl):	Telnet klient
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	8
+Release:	9
 Group:		Networking
 Group(pl):	Sieciowe
 License:	BSD
@@ -90,6 +90,7 @@ us³ugi telnet.
 CC=gcc ; export CC
 CFLAGS="$RPM_OPT_FLAGS -DINET6"; export CFLAGS
 ./configure \
+	--with-c-compiler=gcc \
 	--prefix=%{_prefix}
 
 %{__make} OPT="$RPM_OPT_FLAGS -D__USE_UNIX98"
