@@ -7,7 +7,7 @@ Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	20
+Release:	21
 Group:		Networking
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -18,6 +18,7 @@ Patch1:		netkit-%{name}-fixes.patch
 Patch2:		netkit-%{name}-ayt.patch
 Patch3:		netkit-%{name}-issue.patch
 Patch4:		netkit-%{name}-cpp.patch
+Patch5:		netkit-%{name}-pld_man.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gcc-c++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -113,6 +114,7 @@ kullanýcýlarýn baðlanabilir.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 # don't use configure macro
@@ -140,8 +142,6 @@ install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
 rm -f $RPM_BUILD_ROOT%{_sbindir}/*
 install telnetd/telnetd $RPM_BUILD_ROOT%{_sbindir}
 
-gzip -9nf BUGS README
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -167,7 +167,7 @@ fi
 
 %files -n telnetd
 %defattr(644,root,root,755)
-%doc {BUGS,README}.gz
+%doc BUGS README
 %attr(640,root,root) %config(noreplace) %verify(not mtime md5 size) /etc/sysconfig/rc-inetd/telnetd
 
 %attr(755,root,root) %{_sbindir}/*
