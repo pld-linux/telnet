@@ -7,7 +7,7 @@ Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	19
+Release:	20
 Group:		Networking
 Group(de):	Netzwerkwesen
 Group(es):	Red
@@ -21,6 +21,7 @@ Patch0:		netkit-%{name}-ipv6.patch
 Patch1:		netkit-%{name}-fixes.patch
 Patch2:		netkit-%{name}-ayt.patch
 Patch3:		netkit-%{name}-issue.patch
+Patch4:		netkit-%{name}-cpp.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gcc-c++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -119,6 +120,7 @@ kullanýcýlarýn baðlanabilir.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 # don't use configure macro
