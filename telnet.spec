@@ -56,6 +56,7 @@ Group(pl):	Sieciowe
 Requires:	inetdaemon
 Requires:	login
 Prereq:		rc-inetd >= 0.8
+Obsoletes:	telnet-server
 
 %description -n telnetd
 Telnet is a popular protocol for remote logins across the Internet. This
