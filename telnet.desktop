@@ -2,7 +2,9 @@
 Name=Telnet
 Type=Application
 Comment=Client to connect to remote machines via a text interface
+Comment[de]=Telnet-Client für den textbasierten Remotezugang zu anderen Computern
 Comment[pl]=Klient us³ugi telnet
+Comment[sv]=klient för anslutning till fjärrmaskiner via ett textgränssnitt
 Exec=telnet
 Icon=telnet.xpm
 Terminal=true
