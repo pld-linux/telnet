@@ -7,7 +7,7 @@ Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	23
+Release:	24
 Group:		Networking
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -137,10 +137,11 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}} \
 	$RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT/etc/sysconfig/rc-inetd
 
-%{__make} INSTALLROOT=$RPM_BUILD_ROOT install
+%{__make} install \
+	INSTALLROOT=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnetd
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -f 	$RPM_BUILD_ROOT%{_mandir}/man8/*
@@ -172,7 +173,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_desktopdir}telnet.desktop
+%{_desktopdir}/telnet.desktop
 %{_pixmapsdir}/telnet.png
 %{_mandir}/man1/*
 %lang(es) %{_mandir}/es/man1/*
