@@ -4,8 +4,8 @@ Summary(fr):	Client et serveur pour le protocole de connexion telnet.
 Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
-Version:	0.10
-Release:	36
+Version:	0.14
+Release:	1
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
