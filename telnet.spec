@@ -12,7 +12,7 @@ Copyright:	BSD
 URL:		ftp://sunsite.unc.edu/pub/Linux/system/network/daemons
 Source0:	netkit-telnet-%{version}.tar.gz
 #Source1:	%{name}.wmconfig
-Source2:	%{name}.inetd
+Source2:	telnetd.inetd
 Patch0:		netkit-telnet-ipv6.patch
 Patch1:		netkit-telnet-ptmx.patch
 Patch2:		netkit-telnet-fixes.patch
@@ -112,7 +112,7 @@ make INSTALLROOT=$RPM_BUILD_ROOT install
 #install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/telnet
 
 install -d $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnet
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnetd
 
 rm -f 	$RPM_BUILD_ROOT%{_mandir}/man8/*
 install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
@@ -136,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n telnetd
 %defattr(644,root,root,755)
 %doc {BUGS,README}.gz
-%attr(640,root,root) /etc/sysconfig/rc-inetd/telnet
+%attr(640,root,root) /etc/sysconfig/rc-inetd/telnetd
 
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[58]/*
