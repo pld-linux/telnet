@@ -88,7 +88,7 @@ us³ugi telnet.
 %build
 # don't use configure macro
 CC=gcc
-CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g} -DINET6"
+CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g} -DINET6" \
 ./configure \
 	--with-c-compiler=gcc \
 	--prefix=%{_prefix}
