@@ -5,7 +5,7 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.10
-Release:	35
+Release:	36
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
@@ -20,6 +20,7 @@ Patch5:		telnet-maint.patch
 Patch6:		telnet-utmp.patch
 Patch7:		telnetd-term.patch
 BuildRequires:	ncurses-devel >= 5.0
+Prereq:		rc-inetd >= 0.8
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -132,14 +133,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %post -n telnetd
 if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd restart 1>&2
+	/etc/rc.d/init.d/rc-inetd reload 1>&2
 else
 	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
 fi
 
 %postun -n telnetd
 if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd restart
+	/etc/rc.d/init.d/rc-inetd reload
 fi
 
 %files
