@@ -108,13 +108,13 @@ CFLAGS="RPM_OPT_FLAGS"; export CFLAGS
 ./configure \
 	--prefix=%{_prefix}
 
-make OPT="$RPM_OPT_FLAGS -D__USE_UNIX98"
+%{__make} OPT="$RPM_OPT_FLAGS -D__USE_UNIX98"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,5,8}}
 
-make INSTALLROOT=$RPM_BUILD_ROOT install
+%{__make} INSTALLROOT=$RPM_BUILD_ROOT install
 
 install -d $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/telnetd
