@@ -87,13 +87,13 @@ us³ugi telnet.
 
 %build
 # don't use configure macro
-CC=gcc ; export CC
-CFLAGS="$RPM_OPT_FLAGS -DINET6"; export CFLAGS
+CC=gcc
+CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g} -DINET6"
 ./configure \
 	--with-c-compiler=gcc \
 	--prefix=%{_prefix}
 
-%{__make} OPT="$RPM_OPT_FLAGS -D__USE_UNIX98"
+%{__make} OPT="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g} -D__USE_UNIX98"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -108,11 +108,10 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network
 rm -f 	$RPM_BUILD_ROOT%{_mandir}/man8/*
 install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
-rm -f 	$RPM_BUILD_ROOT%{_sbindir}/*
-install -s telnetd/telnetd $RPM_BUILD_ROOT%{_sbindir}
+rm -f $RPM_BUILD_ROOT%{_sbindir}/*
+install telnetd/telnetd $RPM_BUILD_ROOT%{_sbindir}
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man[158]/* \
-	BUGS README
+gzip -9nf BUGS README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
