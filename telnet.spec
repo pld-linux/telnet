@@ -9,10 +9,6 @@ Name:		telnet
 Version:	0.17
 Release:	20
 Group:		Networking
-Group(de):	Netzwerkwesen
-Group(es):	Red
-Group(pl):	Sieciowe
-Group(pt_BR):	Rede
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	%{name}d.inetd
@@ -67,10 +63,6 @@ Summary(pl):	Serwer us³ugi telnet
 Summary(pt_BR):	Servidor para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Group:		Networking
-Group(de):	Netzwerkwesen
-Group(es):	Red
-Group(pl):	Sieciowe
-Group(pt_BR):	Rede
 Requires:	inetdaemon
 Requires:	login
 Prereq:		rc-inetd >= 0.8
