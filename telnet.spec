@@ -1,20 +1,25 @@
 Summary:	Client for the telnet remote login protocol
 Summary(de):	Client für das entfernte Login-Protokoll 'telnet'
 Summary(fr):	Client pour le protocole de connexion telnet
-Summary(pl):	Telnet klient
+Summary(pl):	Klient protoko³u telnet
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	11
+Release:	12
 Group:		Networking
+Group(de):	Netzwerkwesen
+Group(es):	Red
 Group(pl):	Sieciowe
+Group(pt_BR):	Rede
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	%{name}d.inetd
 Source2:	%{name}.desktop
 Patch0:		netkit-%{name}-ipv6.patch
-Patch2:		netkit-%{name}-fixes.patch
+Patch1:		netkit-%{name}-fixes.patch
+Patch2:		netkit-%{name}-ayt.patch
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	gcc-c++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,7 +52,10 @@ Summary(fr):	Serveur pour le protocole de connexion distante telnet
 Summary(pl):	Serwer us³ugi telnet
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Group:		Networking
+Group(de):	Netzwerkwesen
+Group(es):	Red
 Group(pl):	Sieciowe
+Group(pt_BR):	Rede
 Requires:	inetdaemon
 Requires:	login
 Prereq:		rc-inetd >= 0.8
@@ -82,8 +90,9 @@ us³ugi telnet.
 
 %prep
 %setup -q -n netkit-%{name}-%{version}
-%patch0 -p1 
-%patch2 -p1 
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 # don't use configure macro
