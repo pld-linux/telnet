@@ -5,7 +5,7 @@ Summary(pl): Telnet - klient
 Summary(tr): Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:        telnet
 Version:     0.10
-Release:     6
+Release:     7
 Copyright:   BSD
 Group:       Networking
 Source0:     ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
@@ -44,7 +44,7 @@ komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 %patch -p1
 
 %build
-make CC=egcs
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -52,6 +52,8 @@ install -d $RPM_BUILD_ROOT/{etc/X11/wmconfig,usr/{bin,sbin,man/man{1,5,8}}}
 
 make INSTALLROOT=$RPM_BUILD_ROOT install
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/telnet
+
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man{1,5,8}/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -67,6 +69,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root,  man) /usr/man/man8/*
 
 %changelog
+* Mon Dec  9 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.10-7]
+- added gzipping man pages,
+- removed CC=egcs make parameter.
+
 * Wed Nov 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.10-6]
 - added -q %setup parameter,
