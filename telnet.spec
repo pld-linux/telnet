@@ -8,6 +8,7 @@ Version:     0.10
 Release:     7
 Copyright:   BSD
 Group:       Networking
+Group(pl):   Sieciowe
 Source0:     ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
 Source1:     telnet.wmconfig
 Patch:       netkit-telnet-misc.patch
