@@ -15,6 +15,7 @@ Source0:	netkit-telnet-%{version}.tar.gz
 Patch0:		netkit-telnet-ipv6.patch
 Patch1:		netkit-telnet-ptmx.patch
 Patch2:		netkit-telnet-fixes.patch
+Patch3:		netkit-telnet-c++.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -90,6 +91,7 @@ komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 %patch0 -p1 
 %patch1 -p1 
 %patch2 -p1 
+%patch3 -p1 
 
 %build
 # don't use configure macro
