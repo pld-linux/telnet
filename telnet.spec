@@ -5,7 +5,7 @@ Summary(pl):	Telnet klient
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	9
+Release:	10
 Group:		Networking
 Group(pl):	Sieciowe
 License:	BSD
