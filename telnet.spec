@@ -126,6 +126,7 @@ CC=gcc
 CFLAGS="%{rpmcflags} -DINET6" \
 ./configure \
 	--with-c-compiler=gcc \
+	--with-c++-compiler=g++ \
 	--prefix=%{_prefix}
 
 %{__make} OPT="%{rpmcflags} -D__USE_UNIX98"
