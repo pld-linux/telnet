@@ -7,7 +7,7 @@ Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	25
+Release:	26
 Group:		Networking
 License:	BSD
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -23,6 +23,7 @@ Patch2:		netkit-%{name}-ayt.patch
 Patch3:		netkit-%{name}-issue.patch
 Patch4:		netkit-%{name}-cpp.patch
 Patch5:		netkit-%{name}-pld_man.patch
+Obsoletes:	heimdal-telnet
 BuildRequires:	gcc-c++
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
