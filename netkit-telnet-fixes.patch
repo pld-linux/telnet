@@ -149,15 +149,6 @@ diff -urN netkit-telnet-0.10.orig/telnet/externs.h netkit-telnet-0.10/telnet/ext
 diff -urN netkit-telnet-0.10.orig/telnet/telnet.cc netkit-telnet-0.10/telnet/telnet.cc
 --- netkit-telnet-0.10.orig/telnet/telnet.cc	Sat May 22 12:37:31 1999
 +++ netkit-telnet-0.10/telnet/telnet.cc	Sat May 22 12:37:37 1999
-@@ -57,7 +57,7 @@
- #include "netlink.h"
- #include "terminal.h"
- 
--#include <term.h>
-+#include <termios.h>
- 
- #define	strip(x)	((x)&0x7f)
- 
 @@ -1927,7 +1927,7 @@
  
  int want_status_response = 0;
@@ -188,15 +179,3 @@ diff -urN netkit-telnet-0.10.orig/telnetd/sys_term.c netkit-telnet-0.10/telnetd/
      }
      *cpp++ = val;
      *cpp = 0;
-diff -urN netkit-telnet-0.10.orig/telnetd/telnetd.c netkit-telnet-0.10/telnetd/telnetd.c
---- netkit-telnet-0.10.orig/telnetd/telnetd.c	Sat May 22 12:37:31 1999
-+++ netkit-telnet-0.10/telnetd/telnetd.c	Sat May 22 12:37:37 1999
-@@ -60,7 +60,7 @@
-   "$Id$";
- 
- #include <netdb.h>
--#include <termcap.h>
-+#include <termios.h>
- #include <netinet/in.h>
- #include <netinet/ip.h>
- #include <arpa/inet.h>
