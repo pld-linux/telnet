@@ -1,6 +1,7 @@
 SERVICE_NAME=telnet
 SOCK_TYPE=stream
 PROTOCOL=tcp
+PORT=23
 FLAGS=nowait
 USER=root
 SERVER=tcpd
