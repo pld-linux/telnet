@@ -5,22 +5,16 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.10
-Release:	13
+Release:	15
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
 URL:		ftp://sunsite.unc.edu/pub/Linux/system/network/daemons
 Source0:	netkit-telnet-%{version}.tar.gz
-Source1:	telnet.wmconfig
-Patch0:		netkit-telnet-0.10-misc.patch.gz
-######		ftp://ftp.bieringer.de/pub/linux/IPv6/telnet
-Patch1:		netkit-telnet-0.10-ipv6-1.diff.gz
-Patch2:		netkit-telnet-0.10-telnet_ipv6.patch.gz
-Patch3:		netkit-telnet-0.10-fix.patch.gz
-Patch4:		netkit-telnet.compile.diff
-Patch5:		netkit-telnet-0.10-ptmx.patch
-Patch6:		netkit-telnet-telnetd.patch
-Patch7:		netkit-telnet-man.patch
+#Source1:	telnet.wmconfig
+Patch0:		netkit-telnet-ipv6.patch
+Patch1:		netkit-telnet-ptmx.patch
+Patch2:		netkit-telnet-fixes.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -96,25 +90,23 @@ komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 %patch0 -p1 
 %patch1 -p1 
 %patch2 -p1 
-%patch3 -p1 
-%patch4 -p1 
-%patch5 -p1 
-%patch6 -p1 
-%patch7 -p1 
 
 %build
-%configure 
+# don't use configure macro
+./configure --prefix=/usr
 
-make OPT="$RPM_OPT_FLAGS"
+make OPT="$RPM_OPT_FLAGS -D__USE_UNIX98"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/{bin,sbin,man/man{1,5,8}}
+install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT%{_sbindir}
+install -d $RPM_BUILD_ROOT%{_mandir}/man{1,5,8}
 
 make INSTALLROOT=$RPM_BUILD_ROOT install
 
-install -d $RPM_BUILD_ROOT/etc/X11/wmconfig/
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/telnet
+#install -d $RPM_BUILD_ROOT/etc/X11/wmconfig/
+#install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/telnet
 
 rm -f 	$RPM_BUILD_ROOT%{_mandir}/man8/*
 install telnetd/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
@@ -130,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%config(missingok) /etc/X11/wmconfig/telnet
+#%config(missingok) /etc/X11/wmconfig/telnet
 
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
