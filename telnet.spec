@@ -1,11 +1,13 @@
 Summary:	Client for the telnet remote login protocol
 Summary(de):	Client für das entfernte Login-Protokoll 'telnet'
+Summary(es):	Cliente para el protocolo telnet de login remoto
 Summary(fr):	Client pour le protocole de connexion telnet
 Summary(pl):	Klient protoko³u telnet
+Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	12
+Release:	19
 Group:		Networking
 Group(de):	Netzwerkwesen
 Group(es):	Red
@@ -18,6 +20,7 @@ Source2:	%{name}.desktop
 Patch0:		netkit-%{name}-ipv6.patch
 Patch1:		netkit-%{name}-fixes.patch
 Patch2:		netkit-%{name}-ayt.patch
+Patch3:		netkit-%{name}-issue.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gcc-c++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -30,6 +33,11 @@ This package provides a command line telnet client.
 Telnet ist ein beliebtes Protokoll für entfernte Logins über das
 Internet. Dieses Paket enthält einen Befehlszeilen-Telnet-Client.
 
+%description -l es
+Telnet es un protocolo popular para logins remotos a través de la
+Internet. Este paquete ofrece un cliente telnet en la línea de
+comando.
+
 %description -l fr
 telnet est un protocole très utilisé pour les logins distants sur
 l'Internet. Ce paquetage offre un client telnet
@@ -38,6 +46,10 @@ l'Internet. Ce paquetage offre un client telnet
 Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
 zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera klienta
 us³ugi telnet.
+
+%description -l pt_BR
+O telnet é um protocolo popular para logins remotos através da
+Internet. Este pacote fornece um cliente telnet na linha de comando.
 
 %description -l tr
 Telnet, Internet üzerinden uzak kullanýcý baðlantýlarý için popüler
@@ -48,8 +60,10 @@ kullanýcýlarýn baðlanabilir.
 %package -n telnetd
 Summary:	Server for the telnet remote login protocol
 Summary(de):	Server für das entfernte Login-Protokoll 'telnet'  
+Summary(es):	Servidor para el protocolo telnet de login remoto
 Summary(fr):	Serveur pour le protocole de connexion distante telnet
 Summary(pl):	Serwer us³ugi telnet
+Summary(pt_BR):	Servidor para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Group:		Networking
 Group(de):	Netzwerkwesen
@@ -72,10 +86,26 @@ Internet. Dieses Paket enthält einen Telnet-Dämon, der entfernte
 Logins auf dem Rechner, auf dem er läuft, zuläßt. Der Telnet- Dämon
 ist standardmäßig aktiviert.
 
+%description -l es -n telnetd
+Telnet es un protocolo popular para logins remotos a través de la
+Internet. Este paquete ofrece un servidor telnet que permite login
+remoto dentro de la máquina en que se está ejecutando. editándose
+/etc/inetd.conf.
+
 %description -l fr -n telnetd
 telnet est un protocole très utilisé pour les logins distants sur
 l'Internet. Ce paquetage offre démon telnet permettant des logins
 distants sur la machine sur laquelle il tourne.
+
+%description -l pl -n telnetd
+Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
+zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera serwer
+us³ugi telnet.
+
+%description -l pt_BR -n telnetd
+O telnet é um protocolo popular para logins remotos através da
+Internet. Este pacote fornece um servidor telnet que permite login
+remoto dentro da máquina em que ele está rodando.
 
 %description -l tr -n telnetd
 Telnet, Internet üzerinden uzak kullanýcý baðlantýlarý için popüler
@@ -83,16 +113,12 @@ bir protokoldur. Bu paket, bir komut satýrý istemcisi ile birlikte bir
 sunucu süreci içerir. Sunucu sürecin çalýþtýðý makinaya uzak
 kullanýcýlarýn baðlanabilir.
 
-%description -l pl -n telnetd
-Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
-zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera serwer
-us³ugi telnet.
-
 %prep
 %setup -q -n netkit-%{name}-%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 # don't use configure macro
