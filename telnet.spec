@@ -56,7 +56,7 @@ kullanýcýlarýn baðlanabilir.
 
 %package -n telnetd
 Summary:	Server for the telnet remote login protocol
-Summary(de):	Server für das entfernte Login-Protokoll 'telnet'  
+Summary(de):	Server für das entfernte Login-Protokoll 'telnet'
 Summary(es):	Servidor para el protocolo telnet de login remoto
 Summary(fr):	Serveur pour le protocole de connexion distante telnet
 Summary(pl):	Serwer us³ugi telnet
@@ -73,34 +73,34 @@ Telnet is a popular protocol for remote logins across the Internet.
 This package provides telnet daemon which allows remote logins into
 the machine it is running on.
 
-%description -l de -n telnetd
+%description -n telnetd -l de
 Telnet ist ein beliebtes Protokoll für entfernte Logins über das
 Internet. Dieses Paket enthält einen Telnet-Dämon, der entfernte
 Logins auf dem Rechner, auf dem er läuft, zuläßt. Der Telnet- Dämon
 ist standardmäßig aktiviert.
 
-%description -l es -n telnetd
+%description -n telnetd -l es
 Telnet es un protocolo popular para logins remotos a través de la
 Internet. Este paquete ofrece un servidor telnet que permite login
 remoto dentro de la máquina en que se está ejecutando. editándose
 /etc/inetd.conf.
 
-%description -l fr -n telnetd
+%description -n telnetd -l fr
 telnet est un protocole très utilisé pour les logins distants sur
 l'Internet. Ce paquetage offre démon telnet permettant des logins
 distants sur la machine sur laquelle il tourne.
 
-%description -l pl -n telnetd
+%description -n telnetd -l pl
 Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
 zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera serwer
 us³ugi telnet.
 
-%description -l pt_BR -n telnetd
+%description -n telnetd -l pt_BR
 O telnet é um protocolo popular para logins remotos através da
 Internet. Este pacote fornece um servidor telnet que permite login
 remoto dentro da máquina em que ele está rodando.
 
-%description -l tr -n telnetd
+%description -n telnetd -l tr
 Telnet, Internet üzerinden uzak kullanýcý baðlantýlarý için popüler
 bir protokoldur. Bu paket, bir komut satýrý istemcisi ile birlikte bir
 sunucu süreci içerir. Sunucu sürecin çalýþtýðý makinaya uzak
