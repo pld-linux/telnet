@@ -53,6 +53,8 @@ install -d $RPM_BUILD_ROOT/{etc/X11/wmconfig,usr/{bin,sbin,man/man{1,5,8}}}
 make INSTALLROOT=$RPM_BUILD_ROOT install
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/telnet
 
+rm -rf $RPM_BUILD_ROOT/usr/man/man8/telnetd.8
+echo ".so in.telnetd.8" > $RPM_BUILD_ROOT/usr/man/man8/telnetd.8
 gzip -9nf $RPM_BUILD_ROOT/usr/man/man{1,5,8}/*
 
 %clean
@@ -72,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Dec  9 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.10-7]
 - added gzipping man pages,
+- telnetd(8) man page is now maked as nroff include to
+  in.telnetd(8) instead making sym link to in.telnetd.8 
+  (this allow compress man pages),
 - removed CC=egcs make parameter.
 
 * Wed Nov 13 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
