@@ -5,7 +5,7 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.16
-Release:	2
+Release:	3
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
@@ -14,7 +14,6 @@ Source2:	telnetd.inetd
 Patch0:		netkit-telnet-ipv6.patch
 Patch2:		netkit-telnet-fixes.patch
 BuildRequires:	ncurses-devel >= 5.0
-Prereq:		rc-inetd >= 0.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,6 +54,7 @@ Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Group:		Networking
 Group(pl):	Sieciowe
 Requires:	inetdaemon
+Prereq:		rc-inetd >= 0.8
 
 %description -n telnetd
 Telnet is a popular protocol for remote logins across the Internet. This
