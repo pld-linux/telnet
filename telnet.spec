@@ -21,7 +21,7 @@ Patch6:		telnet-utmp.patch
 Patch7:		telnetd-term.patch
 BuildRequires:	ncurses-devel >= 5.0
 Prereq:		rc-inetd >= 0.8
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Telnet is a popular protocol for remote logins across the Internet. This
