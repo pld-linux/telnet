@@ -128,16 +128,16 @@ gzip -9nf BUGS README
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
+%post -n telnetd
 if [ -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd restart 1>&2
 else
 	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
 fi
 
-%postun
+%postun -n telnetd
 if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd stop
+	/etc/rc.d/init.d/rc-inetd restart
 fi
 
 %files
