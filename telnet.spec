@@ -5,17 +5,20 @@ Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.10
-Release:	15
+Release:	33
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
-URL:		ftp://sunsite.unc.edu/pub/Linux/system/network/daemons
-Source0:	netkit-telnet-%{version}.tar.gz
+Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-telnet-%{version}.tar.gz
 Source2:	telnetd.inetd
 Patch0:		netkit-telnet-ipv6.patch
 Patch1:		netkit-telnet-ptmx.patch
 Patch2:		netkit-telnet-fixes.patch
 Patch3:		netkit-telnet-c++.patch
+Patch4:		netkit-telnet-openpty.patch
+Patch5:		telnet-maint.patch
+Patch6:		telnet-utmp.patch
+Patch7:		telnetd-term.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	inetdaemon
 Prereq:		rc-inetd
@@ -94,10 +97,16 @@ komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 %patch1 -p1 
 %patch2 -p1 
 %patch3 -p1 
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 %build
 # don't use configure macro
-./configure --prefix=/usr
+CFLAGS="RPM_OPT_FLAGS"; export CFLAGS
+./configure \
+	--prefix=%{_prefix}
 
 make OPT="$RPM_OPT_FLAGS -D__USE_UNIX98"
 
