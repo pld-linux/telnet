@@ -19,7 +19,7 @@ Patch2:		netkit-telnet-fixes.patch
 Patch3:		netkit-telnet-c++.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	inetdaemon
-Requires:	rc-inetd
+Prereq:		rc-inetd
 
 %description
 Telnet is a popular protocol for remote logins across the Internet. This
@@ -128,6 +128,18 @@ gzip -9nf BUGS README
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+if [ -f /var/lock/subsys/rc-inetd ]; then
+	/etc/rc.d/init.d/rc-inetd restart 1>&2
+else
+	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
+fi
+
+%postun
+if [ -f /var/lock/subsys/rc-inetd ]; then
+	/etc/rc.d/init.d/rc-inetd stop
+fi
+
 %files
 %defattr(644,root,root,755)
 #%config(missingok) /etc/X11/wmconfig/telnet
@@ -138,7 +150,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n telnetd
 %defattr(644,root,root,755)
 %doc {BUGS,README}.gz
-%attr(640,root,root) /etc/sysconfig/rc-inetd/telnetd
+%attr(640,root,root) %config(noreplace) %verify(not mtime md5 size) /etc/sysconfig/rc-inetd/telnetd
 
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[58]/*
