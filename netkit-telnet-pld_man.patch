@@ -1,0 +1,11 @@
+--- netkit-telnet-0.17/telnetd/telnetd.8~	Thu Oct  3 15:41:06 2002
++++ netkit-telnet-0.17/telnetd/telnetd.8	Thu Oct  3 15:41:06 2002
+@@ -41,7 +41,7 @@
+ .Tn telnet
+ protocol server
+ .Sh SYNOPSIS
+-.Nm /usr/sbin/in.telnetd
++.Nm /usr/sbin/telnetd
+ .Op Fl hns
+ .Op Fl a Ar authmode
+ .Op Fl D Ar debugmode
