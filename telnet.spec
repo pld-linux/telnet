@@ -4,20 +4,20 @@ Summary(fr):	Client et serveur pour le protocole de connexion telnet.
 Summary(pl):	Klient i serwer telnet ze wspomaganiem dla IPv6
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
-Version:	0.14
+Version:	0.16
 Release:	1
 Group:		Networking
 Group(pl):	Sieciowe
 Copyright:	BSD
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-telnet-%{version}.tar.gz
 Source2:	telnetd.inetd
-Patch0:		netkit-telnet-ipv6.patch
-Patch1:		netkit-telnet-ptmx.patch
-Patch2:		netkit-telnet-fixes.patch
-Patch3:		netkit-telnet-c++.patch
-Patch4:		netkit-telnet-openpty.patch
-Patch5:		telnet-maint.patch
-Patch6:		telnet-utmp.patch
+#Patch0:		netkit-telnet-ipv6.patch
+#Patch1:		netkit-telnet-ptmx.patch
+#Patch2:		netkit-telnet-fixes.patch
+#Patch3:		netkit-telnet-c++.patch
+#Patch4:		netkit-telnet-openpty.patch
+#Patch5:		telnet-maint.patch
+#Patch6:		telnet-utmp.patch
 Patch7:		telnetd-term.patch
 BuildRequires:	ncurses-devel >= 5.0
 Prereq:		rc-inetd >= 0.8
@@ -92,14 +92,14 @@ Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na zdalnym
 komputerze w sieci internet i 6bone. Pakiet zawiera klienta i demona telnetd.
 
 %prep
-%setup -q -n netkit-telnet-0.10
-%patch0 -p1 
-%patch1 -p1 
-%patch2 -p1 
-%patch3 -p1 
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
+%setup -q -n netkit-%{name}-%{version}
+#%patch0 -p1 
+#%patch1 -p1 
+#%patch2 -p1 
+#%patch3 -p1 
+#%patch4 -p1
+#%patch5 -p1
+#%patch6 -p1
 %patch7 -p1
 
 %build
