@@ -188,7 +188,7 @@ fi
 %files -n telnetd
 %defattr(644,root,root,755)
 %doc BUGS README
-%attr(640,root,root) %config(noreplace) %verify(not mtime md5 size) /etc/sysconfig/rc-inetd/telnetd
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/telnetd
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[58]/*
 %lang(es) %{_mandir}/es/man[58]/*
