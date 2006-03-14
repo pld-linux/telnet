@@ -8,8 +8,8 @@ Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
 Release:	29
-Group:		Networking
 License:	BSD
+Group:		Networking
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 # Source0-md5:	d6beabaaf53fe6e382c42ce3faa05a36
 Source1:	%{name}d.inetd
@@ -25,9 +25,10 @@ Patch4:		netkit-%{name}-cpp.patch
 Patch5:		netkit-%{name}-pld_man.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel >= 5.0
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	rpmbuild(macros) >= 1.268
 Obsoletes:	heimdal-telnet
 Obsoletes:	inetutils-telnet
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Telnet is a popular protocol for remote logins across the Internet.
@@ -70,9 +71,9 @@ Summary(pl):	Serwer us³ugi telnet
 Summary(pt_BR):	Servidor para o protocolo telnet de login remoto
 Summary(tr):	Telnet uzak baðlantý protokolü için istemci ve sunucu
 Group:		Networking
-Prereq:		rc-inetd >= 0.8
 Requires:	inetdaemon
 Requires:	login
+Requires:	rc-inetd >= 0.8
 Obsoletes:	inetutils-telnetd
 Obsoletes:	telnet-server
 
@@ -161,17 +162,11 @@ rm -f $RPM_BUILD_ROOT%{_mandir}/*/*/*.old
 rm -rf $RPM_BUILD_ROOT
 
 %post -n telnetd
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server" 1>&2
-fi
+%service -q rc-inetd reload
 
 %postun -n telnetd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/rc-inetd ]; then
-		/etc/rc.d/init.d/rc-inetd reload 1>&2
-	fi
+	%service -q rc-inetd reload
 fi
 
 %files
