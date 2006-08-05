@@ -1,7 +1,7 @@
-diff -Naur netkit-telnet-0.16/configure netkit-telnet-0.16-p/configure
---- netkit-telnet-0.16/configure	Sun Dec 12 19:36:00 1999
-+++ netkit-telnet-0.16-p/configure	Wed Jul 12 16:46:35 2000
-@@ -60,7 +60,8 @@
+diff -Nur netkit-telnet-0.17.orig/configure netkit-telnet-0.17.netkit-telnet-fixes/configure
+--- netkit-telnet-0.17.orig/configure	2000-07-29 20:00:29.000000000 +0200
++++ netkit-telnet-0.17.netkit-telnet-fixes/configure	2006-08-05 15:22:22.000000000 +0200
+@@ -57,7 +57,8 @@
  
  BINDIR="$EXECPREFIX/bin"
  SBINDIR="$EXECPREFIX/sbin"
@@ -11,7 +11,7 @@ diff -Naur netkit-telnet-0.16/configure netkit-telnet-0.16-p/configure
  
  echo "Directories: $BINDIR $SBINDIR $MANDIR "
  
-@@ -171,7 +172,6 @@
+@@ -168,7 +169,6 @@
           $CC -O2 __conftest.c -o __conftest
         ) >/dev/null 2>&1; then
           echo 'yes'
@@ -19,7 +19,15 @@ diff -Naur netkit-telnet-0.16/configure netkit-telnet-0.16-p/configure
      else
           echo 'no'
           echo -n "Checking if $CC accepts -O... "
-@@ -547,6 +547,7 @@
+@@ -202,7 +202,6 @@
+              $CXX -O2 __conftest.cc -o __conftest
+            ) >/dev/null 2>&1; then
+              echo 'yes'
+-             CXXFLAGS="$CXXFLAGS -O2"
+         else
+              echo 'no'
+              echo -n "Checking if $CXX accepts -O... "
+@@ -544,6 +543,7 @@
  
      echo "BINDIR=$BINDIR"
      echo "SBINDIR=$SBINDIR"
@@ -27,7 +35,7 @@ diff -Naur netkit-telnet-0.16/configure netkit-telnet-0.16-p/configure
      echo "MANDIR=$MANDIR"
      echo "BINMODE=$BINMODE"
      echo "DAEMONMODE=$DAEMONMODE"
-@@ -557,7 +558,7 @@
+@@ -554,7 +554,7 @@
      echo "CC=$CC"
      echo "CXX=$CXX"
      if [ x$CC_WARNINGS != x ]; then
