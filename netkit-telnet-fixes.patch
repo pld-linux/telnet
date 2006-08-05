@@ -1,6 +1,6 @@
 diff -Nur netkit-telnet-0.17.orig/configure netkit-telnet-0.17.netkit-telnet-fixes/configure
 --- netkit-telnet-0.17.orig/configure	2000-07-29 20:00:29.000000000 +0200
-+++ netkit-telnet-0.17.netkit-telnet-fixes/configure	2006-08-05 15:22:22.000000000 +0200
++++ netkit-telnet-0.17.netkit-telnet-fixes/configure	2006-08-05 15:33:01.000000000 +0200
 @@ -57,7 +57,8 @@
  
  BINDIR="$EXECPREFIX/bin"
@@ -27,7 +27,17 @@ diff -Nur netkit-telnet-0.17.orig/configure netkit-telnet-0.17.netkit-telnet-fix
          else
               echo 'no'
               echo -n "Checking if $CXX accepts -O... "
-@@ -544,6 +543,7 @@
+@@ -252,9 +251,6 @@
+ fi
+ 
+ 
+-LDFLAGS=
+-LIBS=
+-
+ rm -f __conftest*
+ 
+ ##################################################
+@@ -544,6 +540,7 @@
  
      echo "BINDIR=$BINDIR"
      echo "SBINDIR=$SBINDIR"
@@ -35,7 +45,7 @@ diff -Nur netkit-telnet-0.17.orig/configure netkit-telnet-0.17.netkit-telnet-fix
      echo "MANDIR=$MANDIR"
      echo "BINMODE=$BINMODE"
      echo "DAEMONMODE=$DAEMONMODE"
-@@ -554,7 +554,7 @@
+@@ -554,7 +551,7 @@
      echo "CC=$CC"
      echo "CXX=$CXX"
      if [ x$CC_WARNINGS != x ]; then
