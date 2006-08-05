@@ -126,9 +126,10 @@ kullanýcýlarýn baðlanabilir.
 
 %build
 # don't use configure macro
-CC="%{__cc}"
-CFLAGS="%{rpmcflags} -DINET6" \
-CXXFLAGS="%{rpmcflags} -DINET6" \
+CFLAGS="%{rpmcflags} -DINET6"
+CXXFLAGS="%{rpmcflags} -DINET6"
+LDFLAGS="%{rpmldflags}"
+export CFLAGS CXXFLAGS LDFLAGS
 ./configure \
 	--with-c-compiler="%{__cc}" \
 	--with-c++-compiler="%{__cxx}" \
