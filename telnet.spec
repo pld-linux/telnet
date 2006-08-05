@@ -129,7 +129,8 @@ kullanýcýlarýn baðlanabilir.
 CFLAGS="%{rpmcflags} -DINET6"
 CXXFLAGS="%{rpmcflags} -DINET6"
 LDFLAGS="%{rpmldflags}"
-export CFLAGS CXXFLAGS LDFLAGS
+LIBS="-ltinfo"
+export CFLAGS CXXFLAGS LDFLAGS LIBS
 ./configure \
 	--with-c-compiler="%{__cc}" \
 	--with-c++-compiler="%{__cxx}" \
