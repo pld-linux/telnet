@@ -126,12 +126,12 @@ kullanýcýlarýn baðlanabilir.
 
 %build
 # don't use configure macro
-CC=gcc
+CC="%{__cc}"
 CFLAGS="%{rpmcflags} -DINET6" \
 CXXFLAGS="%{rpmcflags} -DINET6" \
 ./configure \
-	--with-c-compiler=gcc \
-	--with-c++-compiler=g++ \
+	--with-c-compiler="%{__cc}" \
+	--with-c++-compiler="%{__cxx}" \
 	--prefix=%{_prefix}
 
 %{__make} OPT="%{rpmcflags} -D__USE_UNIX98"
