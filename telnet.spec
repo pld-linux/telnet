@@ -23,6 +23,7 @@ Patch2:		netkit-%{name}-ayt.patch
 Patch3:		netkit-%{name}-issue.patch
 Patch4:		netkit-%{name}-cpp.patch
 Patch5:		netkit-%{name}-pld_man.patch
+Patch6:		netkit-%{name}-tinfo.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -123,20 +124,19 @@ kullanýcýlarýn baðlanabilir.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 # don't use configure macro
-CFLAGS="%{rpmcflags} -DINET6"
-CXXFLAGS="%{rpmcflags} -DINET6"
-LDFLAGS="%{rpmldflags}"
-LIBS="-ltinfo"
-export CFLAGS CXXFLAGS LDFLAGS LIBS
+CFLAGS="%{rpmcflags} -DINET6" \
+CXXFLAGS="%{rpmcflags} -DINET6" \
+LDFLAGS="%{rpmldflags}" \
 ./configure \
 	--with-c-compiler="%{__cc}" \
 	--with-c++-compiler="%{__cxx}" \
 	--prefix=%{_prefix}
 
-%{__make} OPT="%{rpmcflags} -D__USE_UNIX98"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
