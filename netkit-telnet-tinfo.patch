@@ -1,0 +1,57 @@
+--- netkit-telnet-0.17/configure.orig	2006-10-24 22:18:51.870987500 +0200
++++ netkit-telnet-0.17/configure	2006-10-24 22:20:54.010620750 +0200
+@@ -302,20 +302,36 @@
+ cat <<EOF >__conftest.cc
+ #include <stdio.h>
+ #include <curses.h>
++#include <term.h>
+ #ifndef KEY_DOWN
+ syntax error. /* not ncurses */
+ #endif
+ int main() {
+-    endwin();
++    tgetent(NULL, NULL);
+     return 0;
+ }
+ 
+ EOF
+ if (
++      $CXX $CXXFLAGS  __conftest.cc -ltinfo -o __conftest || exit 1
++   ) >/dev/null 2>&1; then
++    echo 'yes, -ltinfo'
++    NCURSES=1
++    LIBTERMCAP=-ltinfo
++elif (
++      $CXX $CXXFLAGS  -I/usr/include/ncurses __conftest.cc -ltinfo -o __conftest || exit 1
++   ) >/dev/null 2>&1; then
++    echo 'yes, -ltinfo with -I/usr/include/ncurses'
++    CFLAGS="$CFLAGS -I/usr/include/ncurses"
++    CXXFLAGS="$CXXFLAGS -I/usr/include/ncurses"
++    NCURSES=1
++    LIBTERMCAP=-ltinfo
++elif (
+       $CXX $CXXFLAGS  __conftest.cc -lncurses -o __conftest || exit 1
+    ) >/dev/null 2>&1; then
+     echo 'yes'
+     NCURSES=1
++    LIBTERMCAP=-lncurses
+ else
+     if (
+           $CXX $CXXFLAGS -I/usr/include/ncurses __conftest.cc -lncurses -o __conftest || exit 1
+@@ -324,14 +340,13 @@
+         CFLAGS="$CFLAGS -I/usr/include/ncurses"
+         CXXFLAGS="$CXXFLAGS -I/usr/include/ncurses"
+         NCURSES=1
++        LIBTERMCAP=-lncurses
+     else
+         echo 'no'
+     fi
+ fi
+ 
+-if [ x$NCURSES != x ]; then
+-    LIBTERMCAP=-lncurses
+-else
++if [ x$NCURSES = x ]; then
+     echo -n 'Checking for traditional termcap... '
+ cat <<EOF >__conftest.cc
+ #include <stdio.h>
