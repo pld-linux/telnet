@@ -27,17 +27,15 @@ diff -Nur netkit-telnet-0.17.orig/configure netkit-telnet-0.17.netkit-telnet-fix
          else
               echo 'no'
               echo -n "Checking if $CXX accepts -O... "
-@@ -252,9 +251,6 @@
+@@ -252,7 +251,6 @@
  fi
  
  
 -LDFLAGS=
--LIBS=
--
- rm -f __conftest*
+ LIBS=
  
- ##################################################
-@@ -544,6 +540,7 @@
+ rm -f __conftest*
+@@ -544,6 +542,7 @@
  
      echo "BINDIR=$BINDIR"
      echo "SBINDIR=$SBINDIR"
@@ -45,12 +43,3 @@ diff -Nur netkit-telnet-0.17.orig/configure netkit-telnet-0.17.netkit-telnet-fix
      echo "MANDIR=$MANDIR"
      echo "BINMODE=$BINMODE"
      echo "DAEMONMODE=$DAEMONMODE"
-@@ -554,7 +551,7 @@
-     echo "CC=$CC"
-     echo "CXX=$CXX"
-     if [ x$CC_WARNINGS != x ]; then
--        CFLAGS="$CFLAGS $WARNINGS"
-+        CFLAGS="$CFLAGS $WARNINGS -DINET6"
-     fi
- 
-     if [ x$CXX_WARNINGS != x ]; then
