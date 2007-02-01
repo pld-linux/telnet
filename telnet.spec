@@ -50,7 +50,7 @@ l'Internet. Ce paquetage offre un client telnet
 
 %description -l pl
 Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
-zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera klienta
+zdalnym komputerze w sieci Internet i 6bone. Pakiet zawiera klienta
 us³ugi telnet.
 
 %description -l pt_BR
@@ -102,7 +102,7 @@ distants sur la machine sur laquelle il tourne.
 
 %description -n telnetd -l pl
 Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
-zdalnym komputerze w sieci internet i 6bone. Pakiet zawiera serwer
+zdalnym komputerze w sieci Internet i 6bone. Pakiet zawiera serwer
 us³ugi telnet.
 
 %description -n telnetd -l pt_BR
