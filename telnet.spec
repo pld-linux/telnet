@@ -1,10 +1,10 @@
 Summary:	Client for the telnet remote login protocol
-Summary(de.UTF-8):   Client für das entfernte Login-Protokoll 'telnet'
-Summary(es.UTF-8):   Cliente para el protocolo telnet de login remoto
-Summary(fr.UTF-8):   Client pour le protocole de connexion telnet
-Summary(pl.UTF-8):   Klient protokołu telnet
-Summary(pt_BR.UTF-8):   Cliente para o protocolo telnet de login remoto
-Summary(tr.UTF-8):   Telnet uzak bağlantı protokolü için istemci ve sunucu
+Summary(de.UTF-8):	Client für das entfernte Login-Protokoll 'telnet'
+Summary(es.UTF-8):	Cliente para el protocolo telnet de login remoto
+Summary(fr.UTF-8):	Client pour le protocole de connexion telnet
+Summary(pl.UTF-8):	Klient protokołu telnet
+Summary(pt_BR.UTF-8):	Cliente para o protocolo telnet de login remoto
+Summary(tr.UTF-8):	Telnet uzak bağlantı protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
 Release:	29
@@ -65,12 +65,12 @@ kullanıcıların bağlanabilir.
 
 %package -n telnetd
 Summary:	Server for the telnet remote login protocol
-Summary(de.UTF-8):   Server für das entfernte Login-Protokoll 'telnet'
-Summary(es.UTF-8):   Servidor para el protocolo telnet de login remoto
-Summary(fr.UTF-8):   Serveur pour le protocole de connexion distante telnet
-Summary(pl.UTF-8):   Serwer usługi telnet
-Summary(pt_BR.UTF-8):   Servidor para o protocolo telnet de login remoto
-Summary(tr.UTF-8):   Telnet uzak bağlantı protokolü için istemci ve sunucu
+Summary(de.UTF-8):	Server für das entfernte Login-Protokoll 'telnet'
+Summary(es.UTF-8):	Servidor para el protocolo telnet de login remoto
+Summary(fr.UTF-8):	Serveur pour le protocole de connexion distante telnet
+Summary(pl.UTF-8):	Serwer usługi telnet
+Summary(pt_BR.UTF-8):	Servidor para o protocolo telnet de login remoto
+Summary(tr.UTF-8):	Telnet uzak bağlantı protokolü için istemci ve sunucu
 Group:		Networking
 Requires:	inetdaemon
 Requires:	login
