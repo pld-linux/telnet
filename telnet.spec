@@ -1,10 +1,10 @@
 Summary:	Client for the telnet remote login protocol
-Summary(de):	Client für das entfernte Login-Protokoll 'telnet'
-Summary(es):	Cliente para el protocolo telnet de login remoto
-Summary(fr):	Client pour le protocole de connexion telnet
-Summary(pl):	Klient protoko³u telnet
-Summary(pt_BR):	Cliente para o protocolo telnet de login remoto
-Summary(tr):	Telnet uzak bağlantı protokolü için istemci ve sunucu
+Summary(de.UTF-8):   Client fÃ¼r das entfernte Login-Protokoll 'telnet'
+Summary(es.UTF-8):   Cliente para el protocolo telnet de login remoto
+Summary(fr.UTF-8):   Client pour le protocole de connexion telnet
+Summary(pl.UTF-8):   Klient protokoÅ‚u telnet
+Summary(pt_BR.UTF-8):   Cliente para o protocolo telnet de login remoto
+Summary(tr.UTF-8):   Telnet uzak baÄŸlantÄ± protokolÃ¼ iÃ§in istemci ve sunucu
 Name:		telnet
 Version:	0.17
 Release:	29
@@ -35,42 +35,42 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Telnet is a popular protocol for remote logins across the Internet.
 This package provides a command line telnet client.
 
-%description -l de
-Telnet ist ein beliebtes Protokoll für entfernte Logins über das
-Internet. Dieses Paket enthält einen Befehlszeilen-Telnet-Client.
+%description -l de.UTF-8
+Telnet ist ein beliebtes Protokoll fÃ¼r entfernte Logins Ã¼ber das
+Internet. Dieses Paket enthÃ¤lt einen Befehlszeilen-Telnet-Client.
 
-%description -l es
-Telnet es un protocolo popular para logins remotos a través de la
-Internet. Este paquete ofrece un cliente telnet en la línea de
+%description -l es.UTF-8
+Telnet es un protocolo popular para logins remotos a travÃ©s de la
+Internet. Este paquete ofrece un cliente telnet en la lÃ­nea de
 comando.
 
-%description -l fr
-telnet est un protocole très utilisé pour les logins distants sur
+%description -l fr.UTF-8
+telnet est un protocole trÃ¨s utilisÃ© pour les logins distants sur
 l'Internet. Ce paquetage offre un client telnet
 
-%description -l pl
-Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
+%description -l pl.UTF-8
+Telnet jest popularnym protokoÅ‚em umoÅ¼liwiajÄ…cym logowanie siÄ™ na
 zdalnym komputerze w sieci Internet i 6bone. Pakiet zawiera klienta
-us³ugi telnet.
+usÅ‚ugi telnet.
 
-%description -l pt_BR
-O telnet é um protocolo popular para logins remotos através da
+%description -l pt_BR.UTF-8
+O telnet Ã© um protocolo popular para logins remotos atravÃ©s da
 Internet. Este pacote fornece um cliente telnet na linha de comando.
 
-%description -l tr
-Telnet, Internet üzerinden uzak kullanıcı bağlantıları için popüler
-bir protokoldur. Bu paket, bir komut satırı istemcisi ile birlikte bir
-sunucu süreci içerir. Sunucu sürecin çalıştığı makinaya uzak
-kullanıcıların bağlanabilir.
+%description -l tr.UTF-8
+Telnet, Internet Ã¼zerinden uzak kullanÄ±cÄ± baÄŸlantÄ±larÄ± iÃ§in popÃ¼ler
+bir protokoldur. Bu paket, bir komut satÄ±rÄ± istemcisi ile birlikte bir
+sunucu sÃ¼reci iÃ§erir. Sunucu sÃ¼recin Ã§alÄ±ÅŸtÄ±ÄŸÄ± makinaya uzak
+kullanÄ±cÄ±larÄ±n baÄŸlanabilir.
 
 %package -n telnetd
 Summary:	Server for the telnet remote login protocol
-Summary(de):	Server für das entfernte Login-Protokoll 'telnet'
-Summary(es):	Servidor para el protocolo telnet de login remoto
-Summary(fr):	Serveur pour le protocole de connexion distante telnet
-Summary(pl):	Serwer us³ugi telnet
-Summary(pt_BR):	Servidor para o protocolo telnet de login remoto
-Summary(tr):	Telnet uzak bağlantı protokolü için istemci ve sunucu
+Summary(de.UTF-8):   Server fÃ¼r das entfernte Login-Protokoll 'telnet'
+Summary(es.UTF-8):   Servidor para el protocolo telnet de login remoto
+Summary(fr.UTF-8):   Serveur pour le protocole de connexion distante telnet
+Summary(pl.UTF-8):   Serwer usÅ‚ugi telnet
+Summary(pt_BR.UTF-8):   Servidor para o protocolo telnet de login remoto
+Summary(tr.UTF-8):   Telnet uzak baÄŸlantÄ± protokolÃ¼ iÃ§in istemci ve sunucu
 Group:		Networking
 Requires:	inetdaemon
 Requires:	login
@@ -83,38 +83,38 @@ Telnet is a popular protocol for remote logins across the Internet.
 This package provides telnet daemon which allows remote logins into
 the machine it is running on.
 
-%description -n telnetd -l de
-Telnet ist ein beliebtes Protokoll für entfernte Logins über das
-Internet. Dieses Paket enthält einen Telnet-Dämon, der entfernte
-Logins auf dem Rechner, auf dem er läuft, zuläßt. Der Telnet- Dämon
-ist standardmäßig aktiviert.
+%description -n telnetd -l de.UTF-8
+Telnet ist ein beliebtes Protokoll fÃ¼r entfernte Logins Ã¼ber das
+Internet. Dieses Paket enthÃ¤lt einen Telnet-DÃ¤mon, der entfernte
+Logins auf dem Rechner, auf dem er lÃ¤uft, zulÃ¤ÃŸt. Der Telnet- DÃ¤mon
+ist standardmÃ¤ÃŸig aktiviert.
 
-%description -n telnetd -l es
-Telnet es un protocolo popular para logins remotos a través de la
+%description -n telnetd -l es.UTF-8
+Telnet es un protocolo popular para logins remotos a travÃ©s de la
 Internet. Este paquete ofrece un servidor telnet que permite login
-remoto dentro de la máquina en que se está ejecutando. editándose
+remoto dentro de la mÃ¡quina en que se estÃ¡ ejecutando. editÃ¡ndose
 /etc/inetd.conf.
 
-%description -n telnetd -l fr
-telnet est un protocole très utilisé pour les logins distants sur
-l'Internet. Ce paquetage offre démon telnet permettant des logins
+%description -n telnetd -l fr.UTF-8
+telnet est un protocole trÃ¨s utilisÃ© pour les logins distants sur
+l'Internet. Ce paquetage offre dÃ©mon telnet permettant des logins
 distants sur la machine sur laquelle il tourne.
 
-%description -n telnetd -l pl
-Telnet jest popularnym protoko³em umo¿liwiaj±cym logowanie siê na
+%description -n telnetd -l pl.UTF-8
+Telnet jest popularnym protokoÅ‚em umoÅ¼liwiajÄ…cym logowanie siÄ™ na
 zdalnym komputerze w sieci Internet i 6bone. Pakiet zawiera serwer
-us³ugi telnet.
+usÅ‚ugi telnet.
 
-%description -n telnetd -l pt_BR
-O telnet é um protocolo popular para logins remotos através da
+%description -n telnetd -l pt_BR.UTF-8
+O telnet Ã© um protocolo popular para logins remotos atravÃ©s da
 Internet. Este pacote fornece um servidor telnet que permite login
-remoto dentro da máquina em que ele está rodando.
+remoto dentro da mÃ¡quina em que ele estÃ¡ rodando.
 
-%description -n telnetd -l tr
-Telnet, Internet üzerinden uzak kullanıcı bağlantıları için popüler
-bir protokoldur. Bu paket, bir komut satırı istemcisi ile birlikte bir
-sunucu süreci içerir. Sunucu sürecin çalıştığı makinaya uzak
-kullanıcıların bağlanabilir.
+%description -n telnetd -l tr.UTF-8
+Telnet, Internet Ã¼zerinden uzak kullanÄ±cÄ± baÄŸlantÄ±larÄ± iÃ§in popÃ¼ler
+bir protokoldur. Bu paket, bir komut satÄ±rÄ± istemcisi ile birlikte bir
+sunucu sÃ¼reci iÃ§erir. Sunucu sÃ¼recin Ã§alÄ±ÅŸtÄ±ÄŸÄ± makinaya uzak
+kullanÄ±cÄ±larÄ±n baÄŸlanabilir.
 
 %prep
 %setup -q -n netkit-%{name}-%{version}
