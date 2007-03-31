@@ -29,6 +29,7 @@ BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	rpmbuild(macros) >= 1.268
 Obsoletes:	heimdal-telnet
 Obsoletes:	inetutils-telnet
+Obsoletes:	krb5-telnet
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
