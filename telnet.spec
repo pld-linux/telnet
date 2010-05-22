@@ -9,7 +9,7 @@ Name:		telnet
 Version:	0.17
 Release:	31
 License:	BSD
-Group:		Networking
+Group:		Networking/Utilities
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 # Source0-md5:	d6beabaaf53fe6e382c42ce3faa05a36
 Source1:	%{name}d.inetd
