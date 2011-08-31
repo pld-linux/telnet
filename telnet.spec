@@ -7,7 +7,7 @@ Summary(pt_BR.UTF-8):	Cliente para o protocolo telnet de login remoto
 Summary(tr.UTF-8):	Telnet uzak bağlantı protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	31
+Release:	32
 License:	BSD
 Group:		Networking/Utilities
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
