@@ -1,0 +1,48 @@
+diff -urN netkit-telnet-0.17/telnet/utilities.cc netkit-telnet-0.17.new/telnet/utilities.cc
+--- netkit-telnet-0.17/telnet/utilities.cc	2013-01-30 23:07:47.000000000 +0100
++++ netkit-telnet-0.17.new/telnet/utilities.cc	2013-01-30 23:16:27.572745445 +0100
+@@ -583,17 +583,17 @@
+ 			case ENV_VAR:
+ 			    if (pointer[1] == TELQUAL_SEND)
+ 				goto def_case;
+-			    fprintf(NetTrace, "\" VAR " + noquote);
++			    fputs("\" VAR " + noquote, NetTrace);
+ 			    noquote = 2;
+ 			    break;
+ 
+ 			case ENV_VALUE:
+-			    fprintf(NetTrace, "\" VALUE " + noquote);
++			    fputs("\" VALUE " + noquote, NetTrace);
+ 			    noquote = 2;
+ 			    break;
+ 
+ 			case ENV_ESC:
+-			    fprintf(NetTrace, "\" ESC " + noquote);
++			    fputs("\" ESC " + noquote, NetTrace);
+ 			    noquote = 2;
+ 			    break;
+ 
+diff -urN netkit-telnet-0.17/telnetd/utility.c netkit-telnet-0.17.new/telnetd/utility.c
+--- netkit-telnet-0.17/telnetd/utility.c	2013-01-30 23:07:47.000000000 +0100
++++ netkit-telnet-0.17.new/telnetd/utility.c	2013-01-30 23:17:59.775579286 +0100
+@@ -923,17 +923,17 @@
+ 			case ENV_VAR:
+ 			    if (pointer[1] == TELQUAL_SEND)
+ 				goto def_case;
+-			    netoprintf("\" VAR " + noquote);
++			    netoprintf("%s", "\" VAR " + noquote);
+ 			    noquote = 2;
+ 			    break;
+ 
+ 			case ENV_VALUE:
+-			    netoprintf("\" VALUE " + noquote);
++			    netoprintf("%s", "\" VALUE " + noquote);
+ 			    noquote = 2;
+ 			    break;
+ 
+ 			case ENV_ESC:
+-			    netoprintf("\" ESC " + noquote);
++			    netoprintf("%s", "\" ESC " + noquote);
+ 			    noquote = 2;
+ 			    break;
+ 

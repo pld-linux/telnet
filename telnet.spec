@@ -24,6 +24,7 @@ Patch3:		netkit-%{name}-issue.patch
 Patch4:		netkit-%{name}-cpp.patch
 Patch5:		netkit-%{name}-pld_man.patch
 Patch6:		netkit-%{name}-tinfo.patch
+Patch7:		netkit-%{name}-format-security.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -126,6 +127,7 @@ kullanıcıların bağlanabilir.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 # don't use configure macro
