@@ -1,6 +1,7 @@
---- netkit-telnet-0.17/telnet/main.cc~	Sun Aug  1 07:06:37 1999
-+++ netkit-telnet-0.17/telnet/main.cc	Sat Dec 15 10:06:07 2001
-@@ -46,6 +46,7 @@
+diff -urNp -x '*.orig' netkit-telnet-0.17.org/telnet/main.cc netkit-telnet-0.17/telnet/main.cc
+--- netkit-telnet-0.17.org/telnet/main.cc	1999-08-01 07:06:37.000000000 +0200
++++ netkit-telnet-0.17/telnet/main.cc	2024-04-26 18:03:57.359009018 +0200
+@@ -46,6 +46,7 @@ char main_rcsid[] =
  #include <sys/types.h>
  #include <getopt.h>
  #include <string.h>
@@ -8,62 +9,9 @@
  
  #include "ring.h"
  #include "externs.h"
---- netkit-telnet-0.17/telnet/network.cc~	Tue Aug 13 10:09:58 1996
-+++ netkit-telnet-0.17/telnet/network.cc	Sat Dec 15 10:08:17 2001
-@@ -42,6 +42,7 @@
- #include <sys/time.h>
- #include <errno.h>
- #include <arpa/telnet.h>
-+#include <stdlib.h>
- 
- #include "ring.h"
- #include "defines.h"
---- netkit-telnet-0.17/telnet/ring.h~	Tue Aug 13 10:43:28 1996
-+++ netkit-telnet-0.17/telnet/ring.h	Sat Dec 15 10:11:10 2001
-@@ -34,6 +34,8 @@
-  *	$Id$
-  */
- 
-+#undef printf
-+
- class datasink {
-  public:
-     virtual ~datasink() {}
---- netkit-telnet-0.17/telnet/telnet.cc~	Sun Jul 23 05:24:53 2000
-+++ netkit-telnet-0.17/telnet/telnet.cc	Sat Dec 15 10:24:25 2001
-@@ -67,6 +67,8 @@
- #include <term.h>
- #endif
- 
-+#undef printf
-+
- 
- #define	strip(x)	((x)&0x7f)
- 
---- netkit-telnet-0.17/telnet/terminal.cc~	Sun Dec 12 20:48:05 1999
-+++ netkit-telnet-0.17/telnet/terminal.cc	Sat Dec 15 10:26:04 2001
-@@ -45,6 +45,8 @@
- #include <signal.h>
- #include <errno.h>
- #include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
- 
- #include "ring.h"
- #include "defines.h"
---- netkit-telnet-0.17/telnet/utilities.cc~	Sun Dec 12 16:33:40 1999
-+++ netkit-telnet-0.17/telnet/utilities.cc	Sat Dec 15 10:29:31 2001
-@@ -47,6 +47,8 @@
- #include <sys/socket.h>
- #include <unistd.h>
- #include <ctype.h>
-+#include <string.h>
-+#include <stdlib.h>
- 
- #include "ring.h"
- #include "defines.h"
---- netkit-telnet-0.17/telnet/netlink.cc~	Sat Dec 15 10:30:58 2001
-+++ netkit-telnet-0.17/telnet/netlink.cc	Sat Dec 15 10:33:52 2001
+diff -urNp -x '*.orig' netkit-telnet-0.17.org/telnet/netlink.cc netkit-telnet-0.17/telnet/netlink.cc
+--- netkit-telnet-0.17.org/telnet/netlink.cc	2024-04-26 18:03:57.311008385 +0200
++++ netkit-telnet-0.17/telnet/netlink.cc	2024-04-26 18:03:57.359009018 +0200
 @@ -8,6 +8,8 @@
  #include <sys/ioctl.h>
  #include <sys/time.h>
@@ -73,3 +21,62 @@
  #include "netlink.h"
  #include "proto.h"
  #include "ring.h"
+diff -urNp -x '*.orig' netkit-telnet-0.17.org/telnet/network.cc netkit-telnet-0.17/telnet/network.cc
+--- netkit-telnet-0.17.org/telnet/network.cc	1996-08-13 10:09:58.000000000 +0200
++++ netkit-telnet-0.17/telnet/network.cc	2024-04-26 18:03:57.359009018 +0200
+@@ -42,6 +42,7 @@ char net_rcsid[] =
+ #include <sys/time.h>
+ #include <errno.h>
+ #include <arpa/telnet.h>
++#include <stdlib.h>
+ 
+ #include "ring.h"
+ #include "defines.h"
+diff -urNp -x '*.orig' netkit-telnet-0.17.org/telnet/ring.h netkit-telnet-0.17/telnet/ring.h
+--- netkit-telnet-0.17.org/telnet/ring.h	1996-08-13 10:43:28.000000000 +0200
++++ netkit-telnet-0.17/telnet/ring.h	2024-04-26 18:03:57.359009018 +0200
+@@ -34,6 +34,8 @@
+  *	$Id: ring.h,v 1.13 1996/08/13 08:43:28 dholland Exp $
+  */
+ 
++#undef printf
++
+ class datasink {
+  public:
+     virtual ~datasink() {}
+diff -urNp -x '*.orig' netkit-telnet-0.17.org/telnet/telnet.cc netkit-telnet-0.17/telnet/telnet.cc
+--- netkit-telnet-0.17.org/telnet/telnet.cc	2000-07-23 05:24:53.000000000 +0200
++++ netkit-telnet-0.17/telnet/telnet.cc	2024-04-26 18:03:57.359009018 +0200
+@@ -67,6 +67,8 @@ char telnet_rcsid[] =
+ #include <term.h>
+ #endif
+ 
++#undef printf
++
+ 
+ #define	strip(x)	((x)&0x7f)
+ 
+diff -urNp -x '*.orig' netkit-telnet-0.17.org/telnet/terminal.cc netkit-telnet-0.17/telnet/terminal.cc
+--- netkit-telnet-0.17.org/telnet/terminal.cc	1999-12-12 20:48:05.000000000 +0100
++++ netkit-telnet-0.17/telnet/terminal.cc	2024-04-26 18:03:57.359009018 +0200
+@@ -45,6 +45,8 @@ char terminal_rcsid[] =
+ #include <signal.h>
+ #include <errno.h>
+ #include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
+ 
+ #include "ring.h"
+ #include "defines.h"
+diff -urNp -x '*.orig' netkit-telnet-0.17.org/telnet/utilities.cc netkit-telnet-0.17/telnet/utilities.cc
+--- netkit-telnet-0.17.org/telnet/utilities.cc	1999-12-12 16:33:40.000000000 +0100
++++ netkit-telnet-0.17/telnet/utilities.cc	2024-04-26 18:03:57.359009018 +0200
+@@ -47,6 +47,8 @@ char util_rcsid[] =
+ #include <sys/socket.h>
+ #include <unistd.h>
+ #include <ctype.h>
++#include <string.h>
++#include <stdlib.h>
+ 
+ #include "ring.h"
+ #include "defines.h"
