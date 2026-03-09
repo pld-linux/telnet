@@ -7,7 +7,7 @@ Summary(pt_BR.UTF-8):	Cliente para o protocolo telnet de login remoto
 Summary(tr.UTF-8):	Telnet uzak bağlantı protokolü için istemci ve sunucu
 Name:		telnet
 Version:	0.17
-Release:	35
+Release:	37
 License:	BSD
 Group:		Networking/Utilities
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -25,6 +25,8 @@ Patch4:		netkit-%{name}-cpp.patch
 Patch5:		netkit-%{name}-pld_man.patch
 Patch6:		netkit-%{name}-tinfo.patch
 Patch7:		netkit-%{name}-format-security.patch
+Patch8:		netkit-%{name}-time-include.patch
+Patch9:		netkit-%{name}-CVE-2022-39028.patch
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -128,6 +130,8 @@ kullanıcıların bağlanabilir.
 %patch -P5 -p1
 %patch -P6 -p1
 %patch -P7 -p1
+%patch -P8 -p1
+%patch -P9 -p1
 
 %build
 # don't use configure macro

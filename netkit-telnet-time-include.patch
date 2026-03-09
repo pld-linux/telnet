@@ -1,0 +1,10 @@
+--- netkit-telnet-0.17/telnetd/utility.c.orig	2024-01-01 00:00:00.000000000 +0000
++++ netkit-telnet-0.17/telnetd/utility.c	2024-01-01 00:00:00.000000000 +0000
+@@ -40,6 +40,7 @@
+ #define PRINTOPTIONS
+
+ #include <stdarg.h>
++#include <time.h>
+ #include <sys/utsname.h>
+
+ #ifdef AUTHENTICATE
